@@ -5,7 +5,10 @@ const logout = async (req, res) => {
 
   await Auth.findByIdAndUpdate(_id, { token: null });
 
-  res.status(204).json();
+  res.status(204).json({
+    status: "No content found",
+    code: "204",
+  });
 };
 
 module.exports = logout;

@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const Joi = require("joi");
+const Joi = require("joi").extend(require("@joi/date"));
 
 const authSchema = Schema(
   {
@@ -24,6 +24,15 @@ const authSchema = Schema(
       type: String,
       required: [true, "Phone number is required"],
       unique: true,
+    },
+    birthday: {
+      type: String,
+      default: "",
+    },
+    avatarURL: {
+      type: String,
+      default:
+        "https://pixabay.com/get/g8870f9a26b4b0198af65cae3c33656a61c8c5cf4d9422b3a1b93ee87081a2d07001a8f0f5c1ef691fb776c18cbe455170ec07ed771a5304c260cdd6c2a70e47fa71ea2c90f8d91f242f44b7a8e4cc105_1280.png",
     },
     token: {
       type: String,
