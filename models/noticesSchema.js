@@ -6,6 +6,8 @@ const categoryList = ["sell", "lost/found", "in good hands"];
 const sexList = ["male", "female"];
 const dateRegExp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
+const textRegExp = /[A-Z][a-z]+, [A-Z][a-z]*/;  
+const priceRegExp = /^[1-9][0-9]*$/;  
 
 const noticesSchema = new Schema({
     category: {
@@ -88,8 +90,8 @@ const noticesReqSchema = Joi.object({
   birthday: Joi.string().pattern(dateRegExp).optional(),
   breed: Joi.string().min(2).max(24).optional(),
   sex: Joi.string().valid(...Object.values(sexList)).required(),
-  location: Joi.string().required(),
-  price: Joi.number().optional(),
+  location: Joi.string().pattern(textRegExp).required(),
+  price: Joi.number().pattern(priceRegExp).optional(),
   imageURL: Joi.string().optional(),
   comments: Joi.string().min(8).max(120).optional(),
 });
