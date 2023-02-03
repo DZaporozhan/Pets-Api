@@ -12,6 +12,19 @@ const authSchema = Schema(
       required: [true, "Email is required"],
       unique: true,
     },
+    name: {
+      type: String,
+      required: [true, "Name is required"],
+    },
+    city: {
+      type: String,
+      required: [true, "City is required"],
+    },
+    phone: {
+      type: String,
+      required: [true, "Phone number is required"],
+      unique: true,
+    },
     token: {
       type: String,
       default: null,
@@ -29,17 +42,15 @@ const joiRegistrationSchema = Joi.object({
       tlds: { allow: ["com", "net"] },
     })
     .required(),
-  password: Joi.string()
-    .regex(/^(?=.*[A-Za-z])(?=.*d)[A-Za-zd]{7,32}$/)
-    .min(7)
-    .max(32)
-    .required(),
+  password: Joi.string().min(7).max(32).required(),
   repeat_password: Joi.ref("password"),
   name: Joi.string().required(),
-  city: Joi.string().required(),
+  city: Joi.string()
+    .required()
+    .pattern(/[A-Z][a-z]+, [A-Z][a-z]*/),
   phone: Joi.string()
-    .length(10)
-    .pattern(/^[0-9]+$/)
+    .length(13)
+    .pattern(/^\+380\d{9}$/, "numbers")
     .required(),
 });
 
@@ -50,11 +61,7 @@ const joiLoginSchema = Joi.object({
       tlds: { allow: ["com", "net"] },
     })
     .required(),
-  password: Joi.string()
-    .regex(/^[a-zA-Z0-9]{7,32}$/)
-    .min(7)
-    .max(32)
-    .required(),
+  password: Joi.string().min(7).max(32).required(),
 });
 
 module.exports = {
