@@ -10,7 +10,7 @@ const { ctrlWrapper } = require("../../middlewares");
 
 // const { noticesSchemas } = require("../../models/noticesSchema");
 
-router.get("/:id", ctrlWrapper(ctrl.getOneNotice));
-router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
+// router.get("/:id", ctrlWrapper(ctrl.getOneNotice));
+// router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
 module.exports = router;
