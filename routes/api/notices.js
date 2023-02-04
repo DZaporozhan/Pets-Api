@@ -1,4 +1,4 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
@@ -8,7 +8,8 @@ const { ctrlWrapper, authMiddleware } = require("../../middlewares");
 
 const { isValidId } = require("../../middlewares");
 
-const { noticesSchemas } = require("../../models/noticesSchema");
+const { noticesSchemas,
+  noticesReqSchema, } = require("../../models/noticesSchema");
 
 router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
 
@@ -20,4 +21,7 @@ router.patch(
   ctrlWrapper(ctrl.addFavoriteNotices)
 );
 
+router.post('/', auth, validation(noticesReqSchema), ctrlWrapper(ctrl.add));
+
+>>>>>>> main
 module.exports = router;
