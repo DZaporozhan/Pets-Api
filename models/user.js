@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi").extend(require("@joi/date"));
 
-const authSchema = Schema(
+const userSchema = Schema(
   {
     password: {
       type: String,
@@ -23,7 +23,6 @@ const authSchema = Schema(
     phone: {
       type: String,
       required: [true, "Phone number is required"],
-      unique: true,
     },
     birthday: {
       type: String,
@@ -42,7 +41,7 @@ const authSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
-const Auth = model("auth", authSchema);
+const User = model("user", userSchema);
 
 const joiRegistrationSchema = Joi.object({
   email: Joi.string()
@@ -74,7 +73,7 @@ const joiLoginSchema = Joi.object({
 });
 
 module.exports = {
-  Auth,
+  User,
   joiRegistrationSchema,
   joiLoginSchema,
 };

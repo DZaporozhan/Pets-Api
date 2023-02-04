@@ -1,3 +1,3 @@
-const controllerAuth = require("./auth");
+const controllerUser = require("./auth");
 
-module.exports = { controllerAuth };
+module.exports = { controllerUser };
