@@ -3,7 +3,6 @@ const validation = (scheme) => {
     const { error } = scheme.validate(req.body);
     if (error) {
       error.status = 400;
-      error.message = 'missing required field';
       next(error);
     }
     next();
