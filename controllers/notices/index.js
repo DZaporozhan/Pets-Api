@@ -1,9 +1,11 @@
-const getOneNotice = require("./getOneNotice");
 const add = require("./add");
 const addFavoriteNotices = require("./addFavoriteNotices");
+const getOneNotice = require("./getOneNotice");
+const getNoticeByCategory = require("./getNoticeByCategory");
 
 module.exports = {
-  getOneNotice,
   add,
   addFavoriteNotices,
+  getOneNotice,
+  getNoticeByCategory,
 };

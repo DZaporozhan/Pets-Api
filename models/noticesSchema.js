@@ -100,14 +100,9 @@ const noticesReqSchema = Joi.object({
   comments: Joi.string().min(8).max(120).optional(),
 });
 
-const noticesSchemas = {
-  noticesReqSchema,
-};
-
 const Notices = model('notices', noticesSchema);
 
 module.exports = {
   Notices,
-  noticesSchemas,
   noticesReqSchema,
-};
+ };
