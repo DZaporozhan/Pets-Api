@@ -14,7 +14,7 @@ router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
 
 // router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
-router.patch(
+router.post(
   "/toFavorite/:id",
   authMiddleware,
   ctrlWrapper(ctrl.addFavoriteNotices)
