@@ -1,8 +1,7 @@
-const { Auth, joiRegistrationSchema, joiLoginSchema } = require("./auth");
-const { Notices } = require("./noticesSchema");
+const { User, joiRegistrationSchema, joiLoginSchema } = require("./user");
 
 module.exports = {
-  Auth,
+  User,
   joiRegistrationSchema,
   joiLoginSchema,
   Notices,

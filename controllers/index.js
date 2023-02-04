@@ -1,7 +1,3 @@
-const controllerAuth = require("./auth");
-const controllerNotices = require("./notices");
+const controllerUser = require("./auth");
 
-module.exports = {
-    controllerAuth,
-    controllerNotices,
-};
+module.exports = { controllerUser };

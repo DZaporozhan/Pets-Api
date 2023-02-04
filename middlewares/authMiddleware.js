@@ -1,4 +1,4 @@
-const { Auth } = require("../models");
+const { User } = require("../models");
 const createError = require("http-errors");
 const jwt = require("jsonwebtoken");
 
@@ -15,8 +15,9 @@ const authMiddleware = async (req, _, next) => {
 
   try {
     const { id } = jwt.verify(token, SECRET_KEY);
+    console.log(id);
 
-    const user = await Auth.findById(id);
+    const user = await User.findById(id);
     if (!user || !user.token) {
       throw new createError.Unauthorized("Not authorized");
     }
