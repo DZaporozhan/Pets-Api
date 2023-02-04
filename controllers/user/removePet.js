@@ -1,3 +1,3 @@
-const removePet = async (req, res, next) => {};
+const removePet = async (req, res) => {};
 
 module.exports = removePet;

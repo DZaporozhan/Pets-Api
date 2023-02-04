@@ -1,3 +1,3 @@
-const getUserInfo = async (req, res, next) => {};
+const getUserInfo = async (req, res) => {};
 
 module.exports = getUserInfo;
