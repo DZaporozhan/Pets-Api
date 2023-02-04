@@ -6,45 +6,46 @@ const categoryList = ["sell", "lost/found", "in good hands"];
 const sexList = ["male", "female"];
 const dateRegExp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
-const textRegExp = /[A-Z][a-z]+, [A-Z][a-z]*/;  
-const priceRegExp = /^[1-9][0-9]*$/;  
+const textRegExp = /[A-Z][a-z]+, [A-Z][a-z]*/;
+const priceRegExp = /^[1-9][0-9]*$/;
 
-const noticesSchema = new Schema({
+const noticesSchema = new Schema(
+  {
     category: {
-        type: String,
-        enum: ["sell", "in good hands", "lost/found"],
-        required: [true, "field is required!"],
+      type: String,
+      enum: ["sell", "in good hands", "lost/found"],
+      required: [true, "field is required!"],
     },
 
     title: {
-        type: String,
-        required: [true, "field is required!"],
+      type: String,
+      required: [true, "field is required!"],
     },
 
     name: {
-        type: String,
-        default: "",
+      type: String,
+      default: "",
     },
 
     birthdate: {
-        type: String,
-        default: "",
+      type: String,
+      default: "",
     },
 
     breed: {
-        type: String,
-        default: "",
+      type: String,
+      default: "",
     },
 
     sex: {
-        type: String,
-        enum: ["male", "female"],
-        required: [true, "field is required!"], 
+      type: String,
+      enum: ["male", "female"],
+      required: [true, "field is required!"],
     },
 
     location: {
-        type: String,
-        required: [true, "field is required!"],
+      type: String,
+      required: [true, "field is required!"],
     },
 
     comments: {
@@ -59,10 +60,10 @@ const noticesSchema = new Schema({
     imageURL: {
       type: String,
     },
-   
+
     owner: {
       type: Schema.Types.ObjectId,
-      ref: "user",
+      ref: "users",
       required: true,
     },
 
@@ -75,7 +76,7 @@ const noticesSchema = new Schema({
       required: true,
     },
   },
-  
+
   { versionKey: false, timestamps: true }
 );
 
@@ -89,7 +90,9 @@ const noticesReqSchema = Joi.object({
   name: Joi.string().min(2).max(16).optional(),
   birthday: Joi.string().pattern(dateRegExp).optional(),
   breed: Joi.string().min(2).max(24).optional(),
-  sex: Joi.string().valid(...Object.values(sexList)).required(),
+  sex: Joi.string()
+    .valid(...Object.values(sexList))
+    .required(),
   location: Joi.string().pattern(textRegExp).required(),
   price: Joi.string().pattern(priceRegExp).optional(),
   imageURL: Joi.string().optional(),
@@ -103,6 +106,6 @@ const noticesSchemas = {
 const Notices = model("notices", noticesSchema);
 
 module.exports = {
-    Notices,
-    noticesSchemas,
+  Notices,
+  noticesSchemas,
 };
