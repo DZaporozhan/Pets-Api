@@ -1,4 +1,4 @@
-const { User, joiRegistrationSchema } = require("../../models");
+const { User, joiRegistrationSchema } = require("../../models/user");
 const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 

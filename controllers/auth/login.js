@@ -1,4 +1,4 @@
-const { User, joiLoginSchema } = require("../../models");
+const { User, joiLoginSchema } = require("../../models/user");
 const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");

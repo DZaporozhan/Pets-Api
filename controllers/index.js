@@ -1,3 +1,4 @@
 const controllerUser = require("./auth");
+const controllerNotices = require("./notices");
 
-module.exports = { controllerUser };
+module.exports = { controllerUser, controllerNotices };
