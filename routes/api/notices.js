@@ -2,25 +2,26 @@ const express = require('express');
 
 const router = express.Router();
 
-const { controllerNotices, notices: ctrl } = require('../../controllers');
+const { controllerNotices: ctrl } = require("../../controllers");
 
-const {
-  ctrlWrapper,
-  authMiddleware: auth,
-  validation,
-} = require('../../middlewares');
+const { ctrlWrapper, authMiddleware } = require("../../middlewares");
 
-const { isValidId } = require('../../middlewares');
+const { isValidId } = require("../../middlewares");
 
-const {
-  noticesSchemas,
-  noticesReqSchema,
-} = require('../../models/noticesSchema');
+const { noticesSchemas,
+  noticesReqSchema, } = require("../../models/noticesSchema");
 
-router.get('/:id', isValidId, ctrlWrapper(controllerNotices.getOneNotice));
-
-router.post('/', auth, validation(noticesReqSchema), ctrlWrapper(ctrl.add));
+router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
 
 // router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
+router.patch(
+  "/toFavorite",
+  authMiddleware,
+  ctrlWrapper(ctrl.addFavoriteNotices)
+);
+
+router.post('/', auth, validation(noticesReqSchema), ctrlWrapper(ctrl.add));
+
+>>>>>>> main
 module.exports = router;

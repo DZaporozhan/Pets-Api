@@ -1,5 +1,5 @@
-const controllerUser = require('./auth');
-const controllerNotices = require('./notices');
-const notices = require('./notices');
+const controllerUser = require("./auth");
+const controllerNotices = require("./notices");
+const controllerPet = require("./user");
 
-module.exports = { controllerUser, controllerNotices, notices };
+module.exports = { controllerUser, controllerNotices, controllerPet };
