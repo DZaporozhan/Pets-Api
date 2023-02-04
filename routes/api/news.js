@@ -1,8 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const getNews = require("../../controllers/news/getNews");
+const getNews = require("../../controllers/news");
+const { ctrlWrapper } = require("../../middlewares");
 
-router.get("/", getNews);
+
+
+
+router.get("/", ctrlWrapper(getNews));
 
 module.exports = router;
