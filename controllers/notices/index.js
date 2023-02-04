@@ -1,5 +1,7 @@
-const getOneNotice = require("./getOneNotice")
+const getOneNotice = require('./getOneNotice');
+const add = require('./add');
 
 module.exports = {
-    getOneNotice,
+  getOneNotice,
+  add,
 };
