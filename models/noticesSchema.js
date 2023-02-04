@@ -91,7 +91,7 @@ const noticesReqSchema = Joi.object({
   breed: Joi.string().min(2).max(24).optional(),
   sex: Joi.string().valid(...Object.values(sexList)).required(),
   location: Joi.string().pattern(textRegExp).required(),
-  price: Joi.number().pattern(priceRegExp).optional(),
+  price: Joi.string().pattern(priceRegExp).optional(),
   imageURL: Joi.string().optional(),
   comments: Joi.string().min(8).max(120).optional(),
 });
