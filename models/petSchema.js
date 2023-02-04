@@ -26,7 +26,7 @@ const petSchema = Schema(
     },
     owner: {
       type: Schema.Types.ObjectId,
-      ref: 'auth',
+      ref: 'user',
       required: true,
     },
   },
@@ -35,7 +35,7 @@ const petSchema = Schema(
 
 petSchema.post('save', handleValidationError);
 
-const Pet = model('auth', petSchema);
+const Pet = model('pets', petSchema);
 
 const joiAddingPetSchema = Joi.object({
   name: Joi.string().min(2).max(16).required(),
