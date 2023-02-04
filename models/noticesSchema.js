@@ -28,7 +28,7 @@ const noticesSchema = new Schema(
       default: '',
     },
 
-    birthdate: {
+    birthday: {
       type: String,
       default: '',
     },
