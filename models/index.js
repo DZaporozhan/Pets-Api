@@ -4,4 +4,5 @@ module.exports = {
   User,
   joiRegistrationSchema,
   joiLoginSchema,
+  Notices,
 };
