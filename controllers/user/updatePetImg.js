@@ -3,10 +3,7 @@ const createError = require('http-errors');
 
 const updatePetImg = async (req, res) => {
   const { id } = req.params;
-
   const { imageURL } = req.body;
-
-  console.log(imageURL);
 
   const pet = await Pet.findByIdAndUpdate(id, { imageURL });
 
