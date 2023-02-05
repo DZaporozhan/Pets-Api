@@ -23,13 +23,11 @@ const register = async (req, res) => {
     status: "success",
     code: 201,
     user: {
-      result: {
-        email,
-        password,
-        name,
-        city,
-        phone,
-      },
+      email,
+      password,
+      name,
+      phone,
+      city,
     },
   });
 };
