@@ -15,6 +15,14 @@ router.post(
 
 router.delete('/pets/:id', authMiddleware, ctrlWrapper(controllerPet.removePet));
 
+router.patch(
+  '/pets/:id',
+  authMiddleware,
+  upload.single('imageURL'),
+  cloudinaryAddImage,
+  ctrlWrapper(controllerPet.updatePetImg)
+);
+
 router.get('/', authMiddleware, ctrlWrapper(controllerPet.getUserInfo));
 
 module.exports = router;
