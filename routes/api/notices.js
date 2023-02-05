@@ -2,10 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const {
-  controllerNotices: ctrl,
-  controllerImages: cloudinary,
-} = require('../../controllers');
+const { controllerNotices: ctrl } = require('../../controllers');
 
 const { ctrlWrapper } = require('../../helpers');
 
@@ -14,6 +11,7 @@ const {
   authMiddleware,
   validation,
   upload,
+  cloudinaryAddImage,
 } = require('../../middlewares');
 
 const { noticesReqSchema } = require('../../models/noticesSchema');
@@ -33,7 +31,7 @@ router.post(
   authMiddleware,
   upload.single('imageURL'),
   validation(noticesReqSchema),
-  ctrlWrapper(cloudinary.add),
+  cloudinaryAddImage,
   ctrlWrapper(ctrl.add)
 );
 

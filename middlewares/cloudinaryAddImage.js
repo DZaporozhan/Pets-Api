@@ -1,7 +1,7 @@
-const { cloudinary } = require('../../utils');
+const { cloudinary } = require('../utils');
 const fs = require('fs/promises');
 
-const add = async (req, res, next) => {
+const cloudinaryAddImage = async (req, res, next) => {
   if (!req.file) {
     req.body.imageURL = null;
     next();
@@ -34,4 +34,4 @@ const add = async (req, res, next) => {
   next();
 };
 
-module.exports = add;
+module.exports = cloudinaryAddImage;
