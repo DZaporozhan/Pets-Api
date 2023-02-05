@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const { controllerPet } = require("../../controllers");
-const { authMiddleware } = require("../../middlewares");
+const { authMiddleware, upload, cloudinaryAddImage } = require("../../middlewares");
 const { ctrlWrapper } = require("../../helpers");
 
 router.post("/pets", authMiddleware, ctrlWrapper(controllerPet.addPet));
@@ -14,5 +14,13 @@ router.delete(
 );
 
 router.get("/", authMiddleware, ctrlWrapper(controllerPet.getUserInfo));
+
+router.patch(
+  "/",
+  authMiddleware,
+  upload.single("imageURL"),
+  cloudinaryAddImage,
+  ctrlWrapper(controllerPet.updateUser)
+);
 
 module.exports = router;

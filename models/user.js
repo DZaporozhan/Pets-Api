@@ -76,8 +76,24 @@ const joiLoginSchema = Joi.object({
   password: Joi.string().min(7).max(32).required(),
 });
 
+const updateUserSchema = Joi.object({
+  avatarURL: Joi.string(),
+  name: Joi.string(),
+  email: Joi.string().email({
+    minDomainSegments: 2,
+  }),
+  birthday: Joi.date().format("DD.MM.YYYY").utc(),
+  phone: Joi.string()
+    .length(13)
+    .pattern(/^\+380\d{9}$/, "numbers"),
+  city: Joi.string()
+    .required()
+    .pattern(/[A-Z][a-z]+, [A-Z][a-z]*/),
+});
+
 module.exports = {
   User,
   joiRegistrationSchema,
   joiLoginSchema,
+  updateUserSchema,
 };
