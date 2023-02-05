@@ -4,27 +4,15 @@ const router = express.Router();
 
 const { controllerNotices: ctrl } = require("../../controllers");
 
-const {
-  ctrlWrapper,
-  authMiddleware,
-  validation,
-} = require("../../middlewares");
+const { ctrlWrapper } = require("../../helpers");
 
-const { isValidId } = require("../../middlewares");
+const { isValidId, authMiddleware, validation } = require("../../middlewares");
 
-const {
-  noticesReqSchema,
- } = require("../../models/noticesSchema");
+const { noticesReqSchema } = require("../../models/noticesSchema");
 
-router.get(
-  "/:id",
-  isValidId,
-  ctrlWrapper(ctrl.getOneNotice)
-);
+router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
 
-router.get("/",
-  ctrlWrapper(ctrl.getNoticeByCategory)
-);
+router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
 router.post(
   "/favourite/:id",

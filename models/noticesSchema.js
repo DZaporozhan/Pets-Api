@@ -1,9 +1,9 @@
-const { Schema, model } = require('mongoose');
-const Joi = require('joi');
-const { handleValidationError } = require('../middlewares');
+const { Schema, model } = require("mongoose");
+const Joi = require("joi");
+const { handleValidationError } = require("../helpers");
 
-const categoryList = ['sell', 'lost/found', 'in good hands'];
-const sexList = ['male', 'female'];
+const categoryList = ["sell", "lost/found", "in good hands"];
+const sexList = ["male", "female"];
 const dateRegExp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
 const textRegExp =
@@ -14,44 +14,44 @@ const noticesSchema = new Schema(
   {
     category: {
       type: String,
-      enum: ['sell', 'in good hands', 'lost/found'],
-      required: [true, 'field is required!'],
+      enum: ["sell", "in good hands", "lost/found"],
+      required: [true, "field is required!"],
     },
 
     title: {
       type: String,
-      required: [true, 'field is required!'],
+      required: [true, "field is required!"],
     },
 
     name: {
       type: String,
-      default: '',
+      default: "",
     },
 
     birthday: {
       type: String,
-      default: '',
+      default: "",
     },
 
     breed: {
       type: String,
-      default: '',
+      default: "",
     },
 
     sex: {
       type: String,
-      enum: ['male', 'female'],
-      required: [true, 'field is required!'],
+      enum: ["male", "female"],
+      required: [true, "field is required!"],
     },
 
     location: {
       type: String,
-      required: [true, 'field is required!'],
+      required: [true, "field is required!"],
     },
 
     comments: {
       type: String,
-      default: '',
+      default: "",
     },
 
     price: {
@@ -64,24 +64,24 @@ const noticesSchema = new Schema(
 
     owner: {
       type: Schema.Types.ObjectId,
-      ref: 'users',
+      ref: "users",
       required: true,
     },
 
     email: {
       type: String,
-      required: [true, 'email is required field!'],
+      required: [true, "email is required field!"],
     },
     phone: {
       type: String,
-      required: [true, 'phone is required field!'],
+      required: [true, "phone is required field!"],
     },
   },
 
   { versionKey: false, timestamps: true }
 );
 
-noticesSchema.post('save', handleValidationError);
+noticesSchema.post("save", handleValidationError);
 
 const noticesReqSchema = Joi.object({
   category: Joi.string()
@@ -100,9 +100,9 @@ const noticesReqSchema = Joi.object({
   comments: Joi.string().min(8).max(120).optional(),
 });
 
-const Notices = model('notices', noticesSchema);
+const Notices = model("notices", noticesSchema);
 
 module.exports = {
   Notices,
   noticesReqSchema,
- };
+};
