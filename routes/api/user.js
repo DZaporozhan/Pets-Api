@@ -25,4 +25,12 @@ router.patch(
 
 router.get('/', authMiddleware, ctrlWrapper(controllerPet.getUserInfo));
 
+router.patch(
+  "/update",
+  authMiddleware,
+  upload.single("imageURL"),
+  cloudinaryAddImage,
+  ctrlWrapper(controllerPet.updateUser)
+);
+
 module.exports = router;
