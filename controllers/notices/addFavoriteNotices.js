@@ -1,4 +1,3 @@
-const { response } = require("express");
 const { User } = require("../../models/user");
 const { Conflict } = require("http-errors");
 
