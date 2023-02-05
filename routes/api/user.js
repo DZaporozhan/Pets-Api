@@ -16,7 +16,7 @@ router.delete(
 router.get("/", authMiddleware, ctrlWrapper(controllerPet.getUserInfo));
 
 router.patch(
-  "/",
+  "/update",
   authMiddleware,
   upload.single("imageURL"),
   cloudinaryAddImage,

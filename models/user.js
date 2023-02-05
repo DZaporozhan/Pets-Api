@@ -28,7 +28,7 @@ const userSchema = Schema(
       type: String,
       default: "",
     },
-    avatarURL: {
+    imageURL: {
       type: String,
       default:
         "https://pixabay.com/get/g8870f9a26b4b0198af65cae3c33656a61c8c5cf4d9422b3a1b93ee87081a2d07001a8f0f5c1ef691fb776c18cbe455170ec07ed771a5304c260cdd6c2a70e47fa71ea2c90f8d91f242f44b7a8e4cc105_1280.png",
@@ -77,7 +77,7 @@ const joiLoginSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-  avatarURL: Joi.string(),
+  imageURL: Joi.string(),
   name: Joi.string(),
   email: Joi.string().email({
     minDomainSegments: 2,
@@ -89,6 +89,7 @@ const updateUserSchema = Joi.object({
   city: Joi.string()
     .required()
     .pattern(/[A-Z][a-z]+, [A-Z][a-z]*/),
+  password: Joi.string().min(7).max(32).required(),
 });
 
 module.exports = {
