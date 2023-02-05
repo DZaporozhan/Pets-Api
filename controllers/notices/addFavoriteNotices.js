@@ -2,21 +2,17 @@ const { response } = require("express");
 const { User } = require("../../models/user");
 const { Conflict } = require("http-errors");
 
-// bodi прийме {
-//     "favorite": id поста
-// }
-
 const addFavoriteNotices = async (
-  { user: { id, favorite: favoritePosts }, body },
+  { user: { id, favorite: favoritePosts }, params },
   res
 ) => {
-  if (favoritePosts.includes(body.favorite)) {
+  if (favoritePosts.includes(params.id)) {
     throw new Conflict(
-      `fNotice with id: ${body.favorite} is already in your favorite list`
+      `fNotice with id: ${params.id} is already in your favorite list`
     );
   }
 
-  await User.updateOne({ _id: id }, { $push: { favorite: body.favorite } });
+  await User.updateOne({ _id: id }, { $push: { favorite: params.id } });
 
   const { favorite } = await User.findById(id);
 
