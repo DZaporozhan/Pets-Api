@@ -20,7 +20,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Create",
+                        "description": "Created",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -96,7 +96,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Saccses",
+                        "description": "Update success",
                         "content": {
                             "application/json": {
                                 "schema": {
