@@ -8,7 +8,7 @@ const cloudinaryAddImage = async (req, res, next) => {
     return;
   }
 
-  const { category, password } = req.body;
+  const { category, birthdate } = req.body;
 
   const { path: imagePath } = req.file;
 
@@ -20,10 +20,10 @@ const cloudinaryAddImage = async (req, res, next) => {
 
   if (category) {
     folder = 'Pets';
-  } else if (password) {
-    folder = 'Users';
-  } else {
+  } else if (birthdate) {
     folder = 'Avatars';
+  } else {
+    folder = 'Users';
   }
 
   const uploadedResponse = await cloudinary.uploader.upload(imageURL, {
