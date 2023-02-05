@@ -13,13 +13,18 @@ const {
 const { isValidId } = require("../../middlewares");
 
 const {
-  noticesSchemas,
   noticesReqSchema,
-} = require("../../models/noticesSchema");
+ } = require("../../models/noticesSchema");
 
-router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
+router.get(
+  "/:id",
+  isValidId,
+  ctrlWrapper(ctrl.getOneNotice)
+);
 
-// router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
+router.get("/",
+  ctrlWrapper(ctrl.getNoticeByCategory)
+);
 
 router.post(
   "/favourite/:id",
