@@ -1,18 +1,20 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const { controllerPet } = require("../../controllers");
-const { authMiddleware } = require("../../middlewares");
-const { ctrlWrapper } = require("../../helpers");
+const { controllerPet } = require('../../controllers');
+const { authMiddleware, upload, cloudinaryAddImage } = require('../../middlewares');
+const { ctrlWrapper } = require('../../helpers');
 
-router.post("/pets", authMiddleware, ctrlWrapper(controllerPet.addPet));
-
-router.delete(
-  "/pets/:id",
+router.post(
+  '/pets',
   authMiddleware,
-  ctrlWrapper(controllerPet.removePet)
+  upload.single('imageURL'),
+  cloudinaryAddImage,
+  ctrlWrapper(controllerPet.addPet)
 );
 
-router.get("/", authMiddleware, ctrlWrapper(controllerPet.getUserInfo));
+router.delete('/pets/:id', authMiddleware, ctrlWrapper(controllerPet.removePet));
+
+router.get('/', authMiddleware, ctrlWrapper(controllerPet.getUserInfo));
 
 module.exports = router;
