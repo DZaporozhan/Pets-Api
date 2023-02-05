@@ -3,7 +3,6 @@ const fs = require('fs/promises');
 
 const cloudinaryAddImage = async (req, res, next) => {
   if (!req.file) {
-    req.body.imageURL = null;
     next();
     return;
   }
