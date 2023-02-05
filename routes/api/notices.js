@@ -21,8 +21,9 @@ router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
 router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
 router.post(
-  "/favourite/:id",
+  "/favorite/:id",
   authMiddleware,
+  isValidId,
   ctrlWrapper(ctrl.addFavoriteNotices)
 );
 
@@ -39,6 +40,13 @@ router.get(
   "/owner/notices",
   authMiddleware,
   ctrlWrapper(ctrl.getAllUserNotices)
+);
+
+router.delete(
+  "/owner/:id",
+  authMiddleware,
+  isValidId,
+  ctrlWrapper(ctrl.removeUserNotice)
 );
 
 module.exports = router;
