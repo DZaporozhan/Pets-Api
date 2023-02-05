@@ -7,6 +7,10 @@ const { SECRET_KEY } = process.env;
 const authMiddleware = async (req, _, next) => {
   const { authorization = "" } = req.headers;
 
+  if (!authorization) {
+    next(new Error("Please provide a token, no token in authorization header"));
+  }
+
   const [bearer, token] = authorization.split(" ");
 
   if (bearer !== "Bearer") {
