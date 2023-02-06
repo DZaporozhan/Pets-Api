@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const Joi = require('joi').extend(require('@joi/date'));
-const { handleValidationError } = require('../middlewares');
+const { handleValidationError } = require('../helpers');
 
 const petSchema = Schema(
   {
@@ -20,7 +20,7 @@ const petSchema = Schema(
       type: String,
       default: '',
     },
-    avatarURL: {
+    imageURL: {
       type: String,
       default: '',
     },
@@ -42,7 +42,7 @@ const joiAddingPetSchema = Joi.object({
   birthdate: Joi.date().format('DD.MM.YYYY').required(),
   breed: Joi.string().min(2).max(16).required(),
   comments: Joi.string().min(8).max(120).optional(),
-  avatarURL: Joi.string().optional(),
+  imageURL: Joi.string().optional(),
 });
 
 module.exports = {

@@ -3,7 +3,7 @@ const router = express.Router();
 
 const getServices = require("../../controllers/services/getServices");
 
-const { ctrlWrapper } = require("../../middlewares");
+const { ctrlWrapper } = require("../../helpers");
 
 router.get("/", ctrlWrapper(getServices));
 

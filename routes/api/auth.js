@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const { controllerUser } = require("../../controllers");
-const { ctrlWrapper, authMiddleware } = require("../../middlewares");
+const { authMiddleware } = require("../../middlewares");
+const { ctrlWrapper } = require("../../helpers");
 
 router.post("/register", ctrlWrapper(controllerUser.register));
 
