@@ -5,10 +5,10 @@ const getOneNotice = async (req, res) => {
   const { id } = req.params;
     const result = await Notices.findById(id); 
   if (!result) {
-    throw new createError.NotFound(`Contact with id=${id} not found`);
+    throw new createError.NotFound(`Notice with id=${id} not found`);
   }
   res.json({
-    status: "success",
+    status: "Success",
     code: 200,
     data: {
       result,
