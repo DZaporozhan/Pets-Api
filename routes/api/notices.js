@@ -20,11 +20,18 @@ router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
 
 router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
+// favoriteNotices
 router.post(
-  "/favorite/:id",
+  "/favourite/:id",
   authMiddleware,
   isValidId,
   ctrlWrapper(ctrl.addFavoriteNotices)
+);
+
+router.delete(
+  "/removeFavorite/:id",
+  authMiddleware,
+  ctrlWrapper(ctrl.removeNoticeFromFavorite)
 );
 
 router.post(
