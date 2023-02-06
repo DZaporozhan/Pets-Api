@@ -13,13 +13,7 @@
                         "description": "search by keyword",
                         "type": "string"
                     },
-                    {
-                        "in": "query",
-                        "name": "page",
-                        "required": false,
-                        "description": "page number",
-                        "type": "integer"
-                    },
+                 
                     {
                         "in": "query",
                         "name": "limit",
