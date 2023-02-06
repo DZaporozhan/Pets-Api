@@ -1,0 +1,127 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Swagger PetsSupport ",
+    "description": "This is the specification for the Pets Support server. ",
+    "version": "0.0.1"
+  },
+  "consumes": ["application/json", "multipart/form-data"],
+  "produces": ["application/json"],
+  "servers": [
+    { "url": "http://localhost:65000/" },
+    { "url": "https://petssupportback-production.up.railway.app/api" }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "News",
+      "description": "Operations with news"
+    },
+    {
+      "name": "ServicesSidebar",
+      "description": "Operations with our partners"
+    },
+    {
+      "name": "Notices",
+      "description": "Operations with our notices"
+    },
+    {
+      "name": "User",
+      "description": "Operations with users"
+    }
+  ],
+  // 36-87
+  "paths": {
+    "/notices/removeFavorite/{id}": {
+      "patch": {
+        "tags": ["Notices"],
+        "summary": "Remove notice favorite",
+        "description": "Remove notice favorite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveNoticeFromFavoriteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "409": {
+            "description": "there is not notice with id: ${id} in your favorite list",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  // 88-116
+  "components": {
+    "schemas": {
+      "RemoveNoticeFromFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "favorite": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "ID notices",
+            "example": "[63b6ec81f474e0269d338e9e]"
+          },
+          "message": {
+            "type": "string",
+            "description": "ID notices",
+            "example": "Notice deleted from favorite"
+          }
+        },
+        "example": {
+          "favorite": [
+            "63b412bc9f6bb331b54624ae",
+            "63b412fca3523c134418e086",
+            "63b413796e2832af1fa84d37"
+          ],
+          "id": "63b4217e613598919c6a71ad",
+          "message": "notice deleted ${id} from favorite"
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
