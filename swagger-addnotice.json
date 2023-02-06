@@ -1,3 +1,49 @@
+// 451-493
+   "/notices": {
+      "post": {
+        "tags": ["Notices"],
+        "summary": "Add notices",
+        "description": "Add notices",
+        "parameters": [],
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "Notices object",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/NoticeAddRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Create",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NoticeAddResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized.Please,provide a token",
+            "content": {}
+          },
+          "403": {
+            "description": "Invalid token",
+            "content": {}
+          }
+        }
+      }
+    }
+
 //1529-1701 
       "NoticeAddRequest": {
         "type": "object",
