@@ -1,0 +1,283 @@
+{
+  "post": {
+    "/notices/favorite/{id}": {
+      "post": {
+        "tags": ["Notices"],
+        "summary": "Add notice to favorite",
+        "description": "Add notice to favorite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "post",
+            "description": "User Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AddNoticeToFavoriteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "id=${id} is not correct id format",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "403": {
+            "description": "Invalid token",
+            "content": {}
+          },
+          "409": {
+            "description": "Notice with id: ${id} is already in your favorite list",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/notices/owner": {
+      "get": {
+        "tags": ["Notices"],
+        "summary": "Get all users notices",
+        "description": "Get all users notices",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "description": "page number for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "the number of query objects to display on one page for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GetUserNoticesResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "403": {
+            "description": "Invalid token",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/notices/owner/{id}": {
+      "delete": {
+        "tags": ["Notices"],
+        "summary": "Delete notice by ID",
+        "description": "Delete notice by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Notice Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveNoticeResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "id=${id} is not correct id format",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "403": {
+            "description": "Invalid token",
+            "content": {}
+          },
+          "404": {
+            "description": "Notice with id: ${params.id} not found!",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "AddNoticeToFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "favorite": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "ID notices",
+            "example": "[63b6ec81f474e0269d338e9e]"
+          },
+          "message": {
+            "type": "string",
+            "description": "ID notices",
+            "example": "Notice add to favorite"
+          }
+        },
+        "example": {
+          "favorite": [
+            "63b412bc9f6bb331b54624ae",
+            "63b412fca3523c134418e086",
+            "63b413796e2832af1fa84d37",
+            "63b4217e613598919c6a71ad"
+          ],
+          "message": "Notice add to favorite"
+        }
+      },
+      "GetUserNoticesResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID notice",
+            "example": "63b6ec81f474e0269d338e9e"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category by notice",
+            "example": "Sell"
+          },
+          "title": {
+            "type": "string",
+            "description": "Title by notice",
+            "example": "dog sell"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pets name",
+            "example": "Sem"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pets birthday",
+            "example": "02.02.2020"
+          },
+          "breed": {
+            "type": "string",
+            "description": "Pets breed",
+            "example": "whiteSnow"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Sex list: [male, female]",
+            "example": "female"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet location",
+            "example": "Kyiv,Ukraine"
+          },
+          "price": {
+            "type": "integer",
+            "description": "Price",
+            "example": 5000
+          },
+          "imageURL": {
+            "type": "string",
+            "description": "Pet image",
+            "example": "https://via.placeholder.com/300.png/#FDF7F2/#111111"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Comments",
+            "example": "Selling an awesome puppy"
+          },
+          "owner": {
+            "type": "string",
+            "description": "ID owner notices",
+            "example": "63b420f8613598919c6a71a8"
+          },
+          "createdAt": {
+            "type": "string",
+            "description": "Date of create notice",
+            "example": "2023-01-05T15:28:01.426Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Date of update notice",
+            "example": "2023-01-05T15:28:01.426Z"
+          }
+        },
+        "example": {
+          "_id": "63b4217e613598919c6a71ad",
+          "category": "sell",
+          "title": "dog sell",
+          "name": "Sem",
+          "birthday": "02.02.2020",
+          "breed": "white",
+          "sex": "female",
+          "location": "kyiv",
+          "price": 5000,
+          "imageURL": "http://www.allwomens.ru/uploads/posts/2014-09/1411469687_snjatsja-krysy3.jpg",
+          "comments": "sads  axfv  asxvc  gfdhgfjhkfjgfhgdfdyrejfhh",
+          "owner": "63b420f8613598919c6a71a8",
+          "createdAt": "2023-01-03T12:37:18.187Z",
+          "updatedAt": "2023-01-03T12:37:18.187Z"
+        }
+      },
+      "RemoveNoticeResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message about success deleted",
+            "example": "notice with id: 63b4217e613598919c6a71ad has been deleted"
+          },
+          "id": {
+            "type": "string",
+            "description": "Id notices success deleted",
+            "example": "63b4217e613598919c6a71ad"
+          }
+        },
+        "example": {
+          "message": "notice with id: 63b4217e613598919c6a71ad has been deleted",
+          "id": "63b4217e613598919c6a71ad"
+        }
+      }
+    }
+  }
+}
