@@ -35,7 +35,7 @@
   ],
   // 36-87
   "paths": {
-    "/notices/removeFavorite/{id}": {
+    "/notices/favorite/{id}": {
       "patch": {
         "tags": ["Notices"],
         "summary": "Remove notice favorite",
