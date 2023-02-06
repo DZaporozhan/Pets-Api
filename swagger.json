@@ -332,7 +332,7 @@
         }
       }
     },
-    "/user/pets/:id": {
+    "/user/pets/{id}": {
       "delete": {
         "tags": ["User"],
         "summary": "Delete User pet",
