@@ -1,0 +1,174 @@
+//1529-1701 
+      "NoticeAddRequest": {
+        "type": "object",
+        "required": ["category", "title", "sex", "location"],
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Category by notice on of ['sell', 'in good hands', 'lost/found']",
+            "example": "sell"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the notice",
+            "example": "Sell dog"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pets name",
+            "example": "Gavriil"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pets birthday",
+            "example": "12.09.2022"
+          },
+          "breed": {
+            "type": "string",
+            "description": "Pets breed",
+            "example": "American Eskimo Dog"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Sex list: [male, female]",
+            "example": "male"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet location",
+            "example": "Dnipro"
+          },
+          "price": {
+            "type": "integer",
+            "description": "Price",
+            "example": "1000$"
+          },
+          "imageURL": {
+            "type": "string",
+            "format": "binary",
+            "description": "Pet image",
+            "example": "image.jpg"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Comments",
+            "example": "I will sell a good puppy"
+          }
+        },
+        "example": {
+          "category": "sell",
+          "title": "Sell dog",
+          "name": "Gavriil",
+          "birthday": "12.09.2022",
+          "breed": "American Eskimo Dog",
+          "sex": "male",
+          "location": "Dnipro",
+          "price": "1000$",
+          "imageURL": "image.jpg",
+          "comments": "I will sell a good puppy"
+        }
+      },
+      "NoticeAddResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "ID notice",
+            "example": "63de834e580fbfaebe24b2b1"
+          },
+          "category": {
+            "type": "string",
+            "description": "Category by notice",
+            "example": "Sell"
+          },
+          "title": {
+            "type": "string",
+            "description": "The title of the notice",
+            "example": "Sell dog"
+          },
+          "name": {
+            "type": "string",
+            "description": "Pets name",
+            "example": "Gavriil"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "Pets birthday",
+            "example": "12.09.2022"
+          },
+          "breed": {
+            "type": "string",
+            "description": "Pets breed",
+            "example": "American Eskimo Dog"
+          },
+          "sex": {
+            "type": "string",
+            "description": "Sex list: [male, female]",
+            "example": "male"
+          },
+          "location": {
+            "type": "string",
+            "description": "Pet location",
+            "example": "Dnipro"
+          },
+          "price": {
+            "type": "integer",
+            "description": "Price",
+            "example": "5000$"
+          },
+          "imageURL": {
+            "type": "string",
+            "description": "Pet image",
+            "example": "https://res.cloudinary.com/dqupdbup3/image/upload/pets/blkn8owhazfjdff9xw2b"
+          },
+          "comments": {
+            "type": "string",
+            "description": "Comments",
+            "example": "I will sell a good puppy"
+          },
+          "owner": {
+            "type": "string",
+            "description": "ID owner notices",
+            "example": "63de15f56129138924783e28"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "example": "illiaillia@gmail.com"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User phone",
+            "example": "+380635248528"
+          },
+
+          "createdAt": {
+            "type": "string",
+            "description": "Date of create notice",
+            "example": "2023-02-04T22:34:36.424+00:00"
+          },
+          "updatedAt": {
+            "type": "string",
+            "description": "Date of update notice",
+            "example": "2023-02-05T18:36:20.225+00:00"
+          }
+        },
+        "example": {
+          "_id": "63de834e580fbfaebe24b2b1",
+          "category": "sell",
+          "title": "Sell dog",
+          "name": "Gavriil",
+          "birthday": "12.09.2022",
+          "breed": "American Eskimo Dog",
+          "sex": "male",
+          "location": "Dnipro",
+          "price": "1000$",
+          "imageURL": "https://res.cloudinary.com/dqupdbup3/image/upload/pets/blkn8owhazfjdff9xw2b",
+          "comments": "I will sell a good puppy",
+          "owner": "63de15f56129138924783e28",
+          "email": "illiaillia@gmail.com",
+          "phone": "+380635248528",
+          "createdAt": "2023-02-04T22:34:36.424+00:00",
+          "updatedAt": "2023-02-05T18:36:20.225+00:00"
+        }
+      }
