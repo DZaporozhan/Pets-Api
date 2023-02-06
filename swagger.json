@@ -208,7 +208,7 @@
         }
       }
     },
-    "/notices/:{id}": {
+    "/notices/{id}": {
       "get": {
         "tags": ["Notices"],
         "summary": "Get one notice by ID",
