@@ -49,27 +49,27 @@
               "schema": { "$ref": "#/components/schemas/RegistrationRequest" }
             }
           }
-        }
-      },
+        },
 
-      "responses": {
-        "201": {
-          "description": "Successful operation",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/RegistrationResponse"
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegistrationResponse"
+                }
               }
             }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "409": {
+            "description": "This email in use",
+            "content": {}
           }
-        },
-        "400": {
-          "description": "Bad request (invalid request body)",
-          "content": {}
-        },
-        "409": {
-          "description": "This email in use",
-          "content": {}
         }
       }
     },
