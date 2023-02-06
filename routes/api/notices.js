@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 
 const router = express.Router();
 
-const { controllerNotices: ctrl } = require('../../controllers');
+const { controllerNotices: ctrl } = require("../../controllers");
 
-const { ctrlWrapper } = require('../../helpers');
+const { ctrlWrapper } = require("../../helpers");
 
 const {
   isValidId,
@@ -12,24 +12,31 @@ const {
   validation,
   upload,
   cloudinaryAddImage,
-} = require('../../middlewares');
+} = require("../../middlewares");
 
-const { noticesReqSchema } = require('../../models/noticesSchema');
+const { noticesReqSchema } = require("../../models/noticesSchema");
 
-router.get('/:id', isValidId, ctrlWrapper(ctrl.getOneNotice));
+router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
 
-router.get('/', ctrlWrapper(ctrl.getNoticeByCategory));
+router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
+// favoriteNotices
 router.post(
-  '/favourite/:id',
+  "/favourite/:id",
   authMiddleware,
   ctrlWrapper(ctrl.addFavoriteNotices)
 );
 
-router.post(
-  '/',
+router.delete(
+  "/removeFavorite/:id",
   authMiddleware,
-  upload.single('imageURL'),
+  ctrlWrapper(ctrl.removeNoticeFromFavorite)
+);
+
+router.post(
+  "/",
+  authMiddleware,
+  upload.single("imageURL"),
   validation(noticesReqSchema),
   cloudinaryAddImage,
   ctrlWrapper(ctrl.add)
