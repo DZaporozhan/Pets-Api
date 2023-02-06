@@ -1,0 +1,146 @@
+{
+  "paths": {
+    "/api/user/": {
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update user info",
+        "description": "User must be logged in and have a valid token in order to change user data (insert a valid token in Swager Authorize). Sending empty fields are not allowed, and will be prevented in Front-End",
+        "security": [{ "Bearer": [] }],
+        "requestBody": {
+          "description": "User's object",
+          "required": false,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {}
+          },
+          "403": {
+            "description": "Please provide a token, no token in authorization header",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UpdateUserRequest": {
+        "type": "object",
+        "properties": {
+          "imageURL": {
+            "type": "string",
+            "format": "binary",
+            "description": "User avatar",
+            "example": "image.jpeg"
+          },
+          "name": {
+            "type": "string",
+            "description": "User name",
+            "example": "Tupac Amaru Shakur"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "example": "shakur@gmail.com",
+            "format": "email"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "User birthday",
+            "example": "13.09.1996"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User phone",
+            "example": "+380987654321"
+          },
+          "city": {
+            "type": "string",
+            "description": "User location",
+            "example": "NewYork"
+          }
+        },
+        "example": {
+          "imageURL": "image.jpeg",
+          "name": "Tupac Amaru Shakur",
+          "email": "shakur@gmail.com",
+          "birthday": "13.09.1996",
+          "phone": "+380987654321",
+          "city": "NewYork"
+        }
+      },
+      "UpdateUserResponse": {
+        "type": "object",
+        "properties": {
+          "imageURL": {
+            "type": "string",
+            "description": "User name",
+            "example": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1673004097/qplslyemyc1eo8qu7jb0.jpg"
+          },
+          "name": {
+            "type": "string",
+            "description": "User name",
+            "example": "Tupac Amaru Shakur"
+          },
+          "email": {
+            "type": "string",
+            "description": "User email",
+            "example": "shakur@gmail.com"
+          },
+          "city": {
+            "type": "string",
+            "description": "User location",
+            "example": "NewYork"
+          },
+          "phone": {
+            "type": "string",
+            "description": "User phone",
+            "example": "+380987654321"
+          },
+          "birthday": {
+            "type": "string",
+            "description": "User birthday",
+            "example": "13.09.1996"
+          }
+        },
+        "example": {
+          "imageURL": "https://i1.sndcdn.com/avatars-000129722476-laeur8-t500x500.jpg",
+          "name": "Tupac Amaru Shakur",
+          "email": "shakur@gmail.com",
+          "city": "NewYork",
+          "phone": "+380987654321",
+          "birthday": "13.09.1996"
+        }
+      }
+    },
+    "securitySchemes": {
+      "Bearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

@@ -2,6 +2,9 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi").extend(require("@joi/date"));
 const { handleValidationError } = require("../helpers");
 
+const cityRegEx =
+  /^(([a-zA-Zа-яА-ЯёЁ]*(\s*)\([a-zA-Zа-яА-ЯёЁ\s]*\))|([a-zA-Zа-яА-ЯёЁ\-0-9]*)|([a-zA-Zа-яА-ЯёЁ]+[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*))$/;
+
 const userSchema = Schema(
   {
     password: {
@@ -59,9 +62,7 @@ const joiRegistrationSchema = Joi.object({
   password: Joi.string().min(7).max(32).required(),
   repeat_password: Joi.ref("password"),
   name: Joi.string().required(),
-  city: Joi.string()
-    .required()
-    .pattern(/[A-Z][a-z]+, [A-Z][a-z]*/),
+  city: Joi.string().required().pattern(cityRegEx),
   phone: Joi.string()
     .length(13)
     .pattern(/^\+380\d{9}$/, "numbers")
@@ -79,7 +80,7 @@ const joiLoginSchema = Joi.object({
 });
 
 const updateUserSchema = Joi.object({
-  imageURL: Joi.string(),
+  imageURL: Joi.string().optional(),
   name: Joi.string(),
   email: Joi.string().email({
     minDomainSegments: 2,
@@ -88,7 +89,7 @@ const updateUserSchema = Joi.object({
   phone: Joi.string()
     .length(13)
     .pattern(/^\+380\d{9}$/, "numbers"),
-  city: Joi.string().pattern(/[A-Z][a-z]+, [A-Z][a-z]*/),
+  city: Joi.string().pattern(cityRegEx),
 });
 
 module.exports = {
