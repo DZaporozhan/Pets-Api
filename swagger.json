@@ -40,7 +40,6 @@
         "summary": "User registration",
         "description": "Registration's object",
         "parameters": [],
-
         "requestBody": {
           "description": "Registration's object",
           "required": true,
@@ -50,7 +49,6 @@
             }
           }
         },
-
         "responses": {
           "201": {
             "description": "Successful operation",
@@ -625,7 +623,7 @@
           "city": {
             "type": "string",
             "description": "User's city and region (only latin letters, all number and all special characters)",
-            "example": "Kiev,Ukraine"
+            "example": "Kiev, Ukraine"
           }
         }
       },
