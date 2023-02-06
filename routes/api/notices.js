@@ -18,11 +18,18 @@ const { noticesReqSchema } = require("../../models/noticesSchema");
 
 router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
+// favoriteNotices
 router.post(
   "/favorite/:id",
   authMiddleware,
   isValidId,
   ctrlWrapper(ctrl.addFavoriteNotices)
+);
+
+router.delete(
+  "/favorite/:id",
+  authMiddleware,
+  ctrlWrapper(ctrl.removeNoticeFromFavorite)
 );
 
 router.post(
