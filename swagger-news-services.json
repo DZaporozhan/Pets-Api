@@ -1,244 +1,237 @@
-{"openapi": "3.0.0",
-"info": {
-  "title": "Swagger PetsSupport ",
-  "description": "This is the specification for the Pets Support server. ",
-  "version": "0.0.1"
-},
-"consumes": ["application/json", "multipart/form-data"],
-"produces": ["application/json"],
-"servers": [
-  { "url": "http://localhost:65000/api/" },
-  { "url": "https://petssupportback-production.up.railway.app" }
-],
-"tags": [
-  {
-    "name": "Auth",
-    "description": "Authorization endpoints"
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Swagger PetsSupport ",
+    "description": "This is the specification for the Pets Support server. ",
+    "version": "0.0.1"
   },
-  {
-    "name": "News",
-    "description": "Operations with news"
-  },
-  {
-    "name": "ServicesSidebar",
-    "description": "Operations with our partners"
-  },
-  {
-    "name": "Notices",
-    "description": "Operations with our notices"
-  },
-  {
-    "name": "User",
-    "description": "Operations with users"
-  }
-],
-      "paths": {
-      
-      "/news": {
-        "get": {
-          "tags": ["News"],
-          "summary": "Get all news",
-          "description": "Get all news",
-          "parameters": [
-            
-          ],
-  
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "$ref": "#/components/schemas/NewsResponse"
-                  }
+  "consumes": ["application/json", "multipart/form-data"],
+  "produces": ["application/json"],
+  "servers": [
+    { "url": "http://localhost:65000/api/" },
+    { "url": "https://petssupportback-production.up.railway.app" }
+  ],
+  "tags": [
+    {
+      "name": "Auth",
+      "description": "Authorization endpoints"
+    },
+    {
+      "name": "News",
+      "description": "Operations with news"
+    },
+    {
+      "name": "ServicesSidebar",
+      "description": "Operations with our partners"
+    },
+    {
+      "name": "Notices",
+      "description": "Operations with our notices"
+    },
+    {
+      "name": "User",
+      "description": "Operations with users"
+    }
+  ],
+  "paths": {
+    "/news": {
+      "get": {
+        "tags": ["News"],
+        "summary": "Get all news",
+        "description": "Get all news",
+        "parameters": [],
+
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NewsResponse"
                 }
               }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {}
-            },
-            "500": {
-              "description": "Server error",
-              "content": {}
             }
-          }
-        }
-      },
-      "i/services": {
-        "get": {
-          "tags": ["ServicesSidebar"],
-          "summary": "Get all news",
-          "description": "Get all Services",
-          "parameters": [],
-          "responses": {
-            "200": {
-              "description": "Success",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/ServicesResponse"
-                    }
-                  }
-                }
-              }
-            },
-            "404": {
-              "description": "Not found",
-              "content": {}
-            },
-            "500": {
-              "description": "Server error",
-              "content": {}
-            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
           }
         }
       }
-      
     },
-    "components": {
-      "schemas": {
-       
-        "NewsResponse": {
-          "type": "object",
-          "properties": {
-            "news": {
-              "type": "array",
-              "items": {
-                "properties": {
-                  "_id": {
-                    "type": "string",
-                    "description": "id",
-                    "example": "63b2a1aac7d7c8862b0f594f"
-                  },
-                  "title": {
-                    "type": "string",
-                    "description": "title",
-                    "example": "В День ветеринара..."
-                  },
-                  "url": {
-                    "type": "string",
-                    "description": "url",
-                    "example": "https://www.kmlvm.com.ua/v-den-veterynara-v-stolytsi-projde-bezkoshtovnyj-trening-z-nadannya-pershoyi-dopomogy-tvarynam/"
-                  },
-                  "description": {
-                    "type": "string",
-                    "description": "description",
-                    "example": "В неділю, 14 серпня, в Тимчасовому притулку для тварин «ВДНГ» пройде ..."
-                  },
-                  "date": {
-                    "type": "string",
-                    "description": "date",
-                    "example": "2022-08-12"
-                  }
-                }
-              }
-            }
-                    },
-          "example":[ {
-            
-                "_id": "63b2a1aac7d7c8862b0f5961",
-                "title": "На Полтавщині запровадять заборону на вилов раків: коли діятиме та чому",
-                "url": "https://suspilne.media/270658-na-poltavsini-zaprovadat-zaboronu-na-vilov-rakiv-koli-diatime-ta-comu/",
-                "description": "У Полтавській області з 15 серпня починає ...",
-                "date": "2022-08-14"
-                
-          }]
-        },
-        "ServicesResponse": {
-          "type": "object",
-          "properties": {
-            "_id": {
-              "type": "string",
-              "description": "id",
-              "example": "63b2a1aac7d7c8862b0f594f"
-            },
-            "title": {
-              "type": "string",
-              "description": "title",
-              "example": "В День ветеринара..."
-            },
-            "url": {
-              "type": "string",
-              "description": "url",
-              "example": "https://www.kmlvm.com.ua/v-den-veterynara-v-stolytsi-projde-bezkoshtovnyj-trening-z-nadannya-pershoyi-dopomogy-tvarynam/"
-            },
-            "addressUrl": {
-              "type": "string",
-              "description": "addressUrl",
-              "example": "https://goo.gl/maps/iq8NXEUf31EAQCzc6"
-            },
-            "imageUrl": {
-              "type": "string",
-              "description": "imageUrl",
-              "example": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_287.png"
-            },
-            "address": {
-              "type": "string",
-              "description": "address",
-              "example": "Fedorivka, Kyiv Oblast, Ukraine, 07372"
-            },
-            "workDays": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "isOpen": {
-                    "type": "boolean",
-                    "description": "isOpen",
-                    "example": "false"
-                  },
-                  "from": {
-                    "type": "string",
-                    "description": "open",
-                    "example": "11:00"
-                  },
-                  "to": {
-                    "type": "string",
-                    "description": "close",
-                    "example": "16:00"
-                  },
-                  "weekday": {
-                    "type": "string",
-                    "description": "weekday",
-                    "example": "SU"
+    "/services": {
+      "get": {
+        "tags": ["ServicesSidebar"],
+        "summary": "Get all news",
+        "description": "Get all Services",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ServicesResponse"
                   }
                 }
               }
             }
           },
-  
-          "example": {
-            "_id": "63b2a23ac7d7c8862b0f5964",
-            "title": "Притулок для бездомних тварин 'Сіріус'",
-            "url": "https://dogcat.com.ua",
-            "addressUrl": "https://goo.gl/maps/iq8NXEUf31EAQCzc6",
-            "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_287.png",
-            "address": "Fedorivka, Kyiv Oblast, Ukraine, 07372",
-            "workDays": [
-              {
-                "isOpen": true,
-                "from": "11:00",
-                "to": "16:00",
-                "weekday": "SU"
-              }
-            ],
-            "phone": "+380931934069",
-            "email": null
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "500": {
+            "description": "Server error",
+            "content": {}
           }
         }
-       
-        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "NewsResponse": {
+        "type": "object",
+        "properties": {
+          "news": {
+            "type": "array",
+            "items": {
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "id",
+                  "example": "63b2a1aac7d7c8862b0f594f"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "title",
+                  "example": "В День ветеринара..."
+                },
+                "url": {
+                  "type": "string",
+                  "description": "url",
+                  "example": "https://www.kmlvm.com.ua/v-den-veterynara-v-stolytsi-projde-bezkoshtovnyj-trening-z-nadannya-pershoyi-dopomogy-tvarynam/"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "description",
+                  "example": "В неділю, 14 серпня, в Тимчасовому притулку для тварин «ВДНГ» пройде ..."
+                },
+                "date": {
+                  "type": "string",
+                  "description": "date",
+                  "example": "2022-08-12"
+                }
+              }
+            }
+          }
+        },
+        "example": [
+          {
+            "_id": "63b2a1aac7d7c8862b0f5961",
+            "title": "На Полтавщині запровадять заборону на вилов раків: коли діятиме та чому",
+            "url": "https://suspilne.media/270658-na-poltavsini-zaprovadat-zaboronu-na-vilov-rakiv-koli-diatime-ta-comu/",
+            "description": "У Полтавській області з 15 серпня починає ...",
+            "date": "2022-08-14"
+          }
+        ]
       },
-      "securitySchemes": {
-        "Bearer": {
-          "type": "http",
-          "scheme": "bearer",
-          "bearerFormat": "JWT"
+      "ServicesResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "id",
+            "example": "63b2a1aac7d7c8862b0f594f"
+          },
+          "title": {
+            "type": "string",
+            "description": "title",
+            "example": "В День ветеринара..."
+          },
+          "url": {
+            "type": "string",
+            "description": "url",
+            "example": "https://www.kmlvm.com.ua/v-den-veterynara-v-stolytsi-projde-bezkoshtovnyj-trening-z-nadannya-pershoyi-dopomogy-tvarynam/"
+          },
+          "addressUrl": {
+            "type": "string",
+            "description": "addressUrl",
+            "example": "https://goo.gl/maps/iq8NXEUf31EAQCzc6"
+          },
+          "imageUrl": {
+            "type": "string",
+            "description": "imageUrl",
+            "example": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_287.png"
+          },
+          "address": {
+            "type": "string",
+            "description": "address",
+            "example": "Fedorivka, Kyiv Oblast, Ukraine, 07372"
+          },
+          "workDays": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "isOpen": {
+                  "type": "boolean",
+                  "description": "isOpen",
+                  "example": "false"
+                },
+                "from": {
+                  "type": "string",
+                  "description": "open",
+                  "example": "11:00"
+                },
+                "to": {
+                  "type": "string",
+                  "description": "close",
+                  "example": "16:00"
+                },
+                "weekday": {
+                  "type": "string",
+                  "description": "weekday",
+                  "example": "SU"
+                }
+              }
+            }
+          }
+        },
+
+        "example": {
+          "_id": "63b2a23ac7d7c8862b0f5964",
+          "title": "Притулок для бездомних тварин 'Сіріус'",
+          "url": "https://dogcat.com.ua",
+          "addressUrl": "https://goo.gl/maps/iq8NXEUf31EAQCzc6",
+          "imageUrl": "https://storage.googleapis.com/kidslikev2_bucket/pets-support/images/sponsors/frame_287.png",
+          "address": "Fedorivka, Kyiv Oblast, Ukraine, 07372",
+          "workDays": [
+            {
+              "isOpen": true,
+              "from": "11:00",
+              "to": "16:00",
+              "weekday": "SU"
+            }
+          ],
+          "phone": "+380931934069",
+          "email": null
         }
-      
+      }
+    }
+  },
+  "securitySchemes": {
+    "Bearer": {
+      "type": "http",
+      "scheme": "bearer",
+      "bearerFormat": "JWT"
     }
   }
-  
+}
