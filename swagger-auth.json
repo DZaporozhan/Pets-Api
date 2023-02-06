@@ -38,48 +38,7 @@
           "content": {}
         }
       }
-    }
-  },
-
-  "api/auth/login": {
-    "post": {
-      "tags": ["Auth"],
-      "summary": "User login",
-      "description": "User login",
-      "parameters": [],
-      "requestBody": {
-        "description": "User's object",
-        "required": true,
-        "content": {
-          "application/json": {
-            "schema": {
-              "$ref": "#/components/schemas/LoginRequest"
-            }
-          }
-        }
-      },
-      "responses": {
-        "200": {
-          "description": "Success",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/LoginResponse"
-              }
-            }
-          }
-        },
-        "400": {
-          "description": "Bad request (invalid request body)",
-          "content": {}
-        },
-        "401": {
-          "description": "Email or password are not found",
-          "content": {}
-        }
-      }
     },
-
     "api/auth/current": {
       "get": {
         "tags": ["Auth"],
@@ -105,7 +64,6 @@
         }
       }
     },
-
     "api/auth/logout": {
       "post": {
         "tags": ["Auth"],
@@ -126,6 +84,45 @@
           },
           "401": {
             "description": "Not authorized",
+            "content": {}
+          }
+        }
+      }
+    },
+    "api/auth/login": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "User login",
+        "description": "User login",
+        "parameters": [],
+        "requestBody": {
+          "description": "User's object",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request (invalid request body)",
+            "content": {}
+          },
+          "401": {
+            "description": "Email or password are not found",
             "content": {}
           }
         }
