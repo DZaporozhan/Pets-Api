@@ -543,15 +543,15 @@
         }
       }
     },
-    "/notices/toFavorite/{id}": {
-      "patch": {
+    "/notices/favorite/{id}": {
+      "post": {
         "tags": ["Notices"],
         "summary": "Add notice to favorite",
         "description": "Add notice to favorite",
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "post",
             "description": "User Id",
             "required": true,
             "type": "string"
@@ -570,11 +570,11 @@
             }
           },
           "400": {
-            "description": "Not valid ID",
+            "description": "id=${id} is not correct id format",
             "content": {}
           },
           "401": {
-            "description": "Not authorized.Please,provide a token",
+            "description": "Not authorized",
             "content": {}
           },
           "403": {
@@ -582,7 +582,7 @@
             "content": {}
           },
           "409": {
-            "description": "fNotice with id: ${id} is already in your favorite list",
+            "description": "Notice with id: ${id} is already in your favorite list",
             "content": {}
           }
         }
@@ -633,7 +633,7 @@
         }
       }
     },
-    "/notices/users": {
+    "/notices/owner/notices": {
       "get": {
         "tags": ["Notices"],
         "summary": "Get all users notices",
@@ -652,19 +652,12 @@
             "description": "the number of query objects to display on one page for pagination",
             "required": false,
             "type": "integer"
-          },
-          {
-            "name": "title",
-            "in": "query",
-            "description": "search in the title of notices by keyword",
-            "required": false,
-            "type": "string"
           }
         ],
         "security": [{ "Bearer": [] }],
         "responses": {
           "200": {
-            "description": "Saccess",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -677,7 +670,7 @@
             }
           },
           "401": {
-            "description": "Not authorized.Please,provide a token",
+            "description": "Not authorized",
             "content": {}
           },
           "403": {
@@ -771,7 +764,9 @@
             "content": {}
           }
         }
-      },
+      }
+    },
+    "/notices/owner/{id}": {
       "delete": {
         "tags": ["Notices"],
         "summary": "Delete notice by ID",
@@ -798,11 +793,11 @@
             }
           },
           "400": {
-            "description": "Not valid ID",
+            "description": "id=${id} is not correct id format",
             "content": {}
           },
           "401": {
-            "description": "Not authorized.Please,provide a token",
+            "description": "Not authorized",
             "content": {}
           },
           "403": {
@@ -810,7 +805,7 @@
             "content": {}
           },
           "404": {
-            "description": "Failure, notice with id: ${noticeId} not found!",
+            "description": "Notice with id: ${params.id} not found!",
             "content": {}
           }
         }
