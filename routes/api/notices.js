@@ -24,6 +24,7 @@ router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 router.post(
   "/favourite/:id",
   authMiddleware,
+  isValidId,
   ctrlWrapper(ctrl.addFavoriteNotices)
 );
 
@@ -40,6 +41,19 @@ router.post(
   validation(noticesReqSchema),
   cloudinaryAddImage,
   ctrlWrapper(ctrl.add)
+);
+
+router.get(
+  "/owner/notices",
+  authMiddleware,
+  ctrlWrapper(ctrl.getAllUserNotices)
+);
+
+router.delete(
+  "/owner/:id",
+  authMiddleware,
+  isValidId,
+  ctrlWrapper(ctrl.removeUserNotice)
 );
 
 module.exports = router;
