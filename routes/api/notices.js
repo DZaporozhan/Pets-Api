@@ -14,7 +14,13 @@ const { isValidId } = require("../../middlewares");
 
 const {
   noticesReqSchema,
- } = require("../../models/noticesSchema");
+} = require("../../models/noticesSchema");
+ 
+router.get("/favorite",
+  authMiddleware,
+  ctrlWrapper(ctrl.getFavoriteNotices)
+);
+
 
 router.get(
   "/:id",
@@ -38,5 +44,6 @@ router.post(
   validation(noticesReqSchema),
   ctrlWrapper(ctrl.add)
 );
+
 
 module.exports = router;
