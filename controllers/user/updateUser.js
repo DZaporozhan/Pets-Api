@@ -1,24 +1,25 @@
 const createHttpError = require("http-errors");
-const { User } = require("../../models/user");
+const { User, updateUserSchema } = require("../../models/user");
 
 const updateUser = async (req, res) => {
-  const { _id, password } = req.user;
-  const { imageURL } = req.body;
+  const { imageURL, name, email, birthday, phone, city } = req.body;
+  const { error } = updateUserSchema.validate(req.body);
+  if (error) {
+    error.status = 400;
+    throw error;
+  }
+
+  const { _id } = req.user;
   const result = await User.findByIdAndUpdate(
     _id,
-    { password, ...req.body },
+    { imageURL, name, email, birthday, phone, city },
     { new: true }
   );
-  console.log(_id);
-  console.log(req.body);
   if (!result) {
     throw createHttpError(401);
   }
-  if (!imageURL) {
-    return res.send({ message: "No user data changed" });
-  }
-  console.log(result);
-  res.json(result);
+  // console.log(result);
+  res.json({ imageURL, name, email, birthday, phone, city });
 };
 
 module.exports = updateUser;
