@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const Joi = require("joi").extend(require("@joi/date"));
+const { handleValidationError } = require("../helpers");
 
 const userSchema = Schema(
   {
@@ -45,6 +46,7 @@ const userSchema = Schema(
   { versionKey: false, timestamps: true }
 );
 
+userSchema.post("save", handleValidationError);
 const User = model("user", userSchema);
 
 const joiRegistrationSchema = Joi.object({
@@ -86,10 +88,7 @@ const updateUserSchema = Joi.object({
   phone: Joi.string()
     .length(13)
     .pattern(/^\+380\d{9}$/, "numbers"),
-  city: Joi.string()
-    .required()
-    .pattern(/[A-Z][a-z]+, [A-Z][a-z]*/),
-  password: Joi.string().min(7).max(32).required(),
+  city: Joi.string().pattern(/[A-Z][a-z]+, [A-Z][a-z]*/),
 });
 
 module.exports = {
