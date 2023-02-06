@@ -22,14 +22,14 @@ router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
 
 // favoriteNotices
 router.post(
-  "/favourite/:id",
+  "/favorite/:id",
   authMiddleware,
   isValidId,
   ctrlWrapper(ctrl.addFavoriteNotices)
 );
 
 router.delete(
-  "/removeFavorite/:id",
+  "/favorite/:id",
   authMiddleware,
   ctrlWrapper(ctrl.removeNoticeFromFavorite)
 );
