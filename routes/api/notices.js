@@ -16,9 +16,9 @@ const {
 
 const { noticesReqSchema } = require("../../models/noticesSchema");
 
-router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
-
 // favoriteNotices
+router.get("/favorite", authMiddleware, ctrlWrapper(ctrl.getFavoriteNotices));
+
 router.post(
   "/favorite/:id",
   authMiddleware,
@@ -32,6 +32,20 @@ router.delete(
   ctrlWrapper(ctrl.removeNoticeFromFavorite)
 );
 
+// myAds Notices
+
+router.get("/owner", authMiddleware, ctrlWrapper(ctrl.getAllUserNotices));
+
+router.delete(
+  "/owner/:id",
+  authMiddleware,
+  isValidId,
+  ctrlWrapper(ctrl.removeUserNotice)
+);
+// Notices
+
+router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
+
 router.post(
   "/",
   authMiddleware,
@@ -41,15 +55,6 @@ router.post(
   ctrlWrapper(ctrl.add)
 );
 
-router.get("/owner", authMiddleware, ctrlWrapper(ctrl.getAllUserNotices));
-
 router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
-
-router.delete(
-  "/owner/:id",
-  authMiddleware,
-  isValidId,
-  ctrlWrapper(ctrl.removeUserNotice)
-);
 
 module.exports = router;
