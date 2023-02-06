@@ -1,4 +1,4 @@
-const { HttpError } = require("http-errors");
+const HttpError = require("../../helpers/HttpError.js");
 const { User } = require("../../models/user");
 
 const removeNoticeFromFavorite = async (req, res) => {
