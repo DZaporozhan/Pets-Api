@@ -7,7 +7,7 @@ const addFavoriteNotices = async (
 ) => {
   if (favoritePosts.includes(params.id)) {
     throw new Conflict(
-      `fNotice with id: ${params.id} is already in your favorite list`
+      `Notice with id: ${params.id} is already in your favorite list`
     );
   }
 
