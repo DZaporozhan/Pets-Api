@@ -12,7 +12,7 @@ const removeNoticeFromFavorite = async (req, res) => {
     );
   }
 
-  const user = await User.findByIdAndUpdate(
+  await User.findByIdAndUpdate(
     _id,
     { $pull: { favorite: id } },
     {
@@ -21,9 +21,7 @@ const removeNoticeFromFavorite = async (req, res) => {
   );
 
   res.status(200).json({
-    favorite: user.favorite,
-    id,
-    message: "notice deleted from favorite",
+    message: `notice deleted ${id} from favorite`,
   });
 };
 
