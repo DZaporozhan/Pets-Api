@@ -9,14 +9,14 @@ const getNoticeByCategory = async (req, res) => {
     const categoryList = ["sell", "lost/found", "in good hands"];
     const key = categoryList.includes(category);
     if (!key) {
-        throw new createError.BadRequest("this category is not exist")
+        throw new createError.BadRequest("BadRequest: This category doesn`t exist")
     }
 
     if (!result ) {
         throw new createError.NotFound("not found")
     }
     res.json({
-        status: "success",
+        status: "Success",
     code: 200,
     data: {
       result,
