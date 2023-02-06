@@ -633,7 +633,7 @@
         }
       }
     },
-    "/notices/owner/notices": {
+    "/notices/owner": {
       "get": {
         "tags": ["Notices"],
         "summary": "Get all users notices",
