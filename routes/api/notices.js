@@ -1,10 +1,10 @@
-const express = require("express");
+const express = require('express');
 
 const router = express.Router();
 
-const { controllerNotices: ctrl } = require("../../controllers");
+const { controllerNotices: ctrl } = require('../../controllers');
 
-const { ctrlWrapper } = require("../../helpers");
+const { ctrlWrapper } = require('../../helpers');
 
 const {
   isValidId,
@@ -12,49 +12,51 @@ const {
   validation,
   upload,
   cloudinaryAddImage,
-} = require("../../middlewares");
+  cloudinaryDeleteImage,
+} = require('../../middlewares');
 
-const { noticesReqSchema } = require("../../models/noticesSchema");
+const { noticesReqSchema } = require('../../models/noticesSchema');
 
 // favoriteNotices
-router.get("/favorite", authMiddleware, ctrlWrapper(ctrl.getFavoriteNotices));
+router.get('/favorite', authMiddleware, ctrlWrapper(ctrl.getFavoriteNotices));
 
 router.post(
-  "/favorite/:id",
+  '/favorite/:id',
   authMiddleware,
   isValidId,
   ctrlWrapper(ctrl.addFavoriteNotices)
 );
 
 router.delete(
-  "/favorite/:id",
+  '/favorite/:id',
   authMiddleware,
+  cloudinaryDeleteImage,
   ctrlWrapper(ctrl.removeNoticeFromFavorite)
 );
 
 // myAds Notices
 
-router.get("/owner", authMiddleware, ctrlWrapper(ctrl.getAllUserNotices));
+router.get('/owner', authMiddleware, ctrlWrapper(ctrl.getAllUserNotices));
 
 router.delete(
-  "/owner/:id",
+  '/owner/:id',
   authMiddleware,
   isValidId,
   ctrlWrapper(ctrl.removeUserNotice)
 );
 // Notices
 
-router.get("/", ctrlWrapper(ctrl.getNoticeByCategory));
+router.get('/', ctrlWrapper(ctrl.getNoticeByCategory));
 
 router.post(
-  "/",
+  '/',
   authMiddleware,
-  upload.single("imageURL"),
+  upload.single('imageURL'),
   validation(noticesReqSchema),
   cloudinaryAddImage,
   ctrlWrapper(ctrl.add)
 );
 
-router.get("/:id", isValidId, ctrlWrapper(ctrl.getOneNotice));
+router.get('/:id', isValidId, ctrlWrapper(ctrl.getOneNotice));
 
 module.exports = router;
