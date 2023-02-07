@@ -14,10 +14,18 @@ const cloudinaryDeleteImage = async (req, res, next) => {
   } else if (path === '/pets/:id') {
     const { id } = req.params;
     const petInfo = await Pet.findById(id);
+    if (!petInfo) {
+      next();
+      return;
+    }
     oldImageURL = petInfo.imageURL;
   } else {
     const { id } = req.params;
     const noticeInfo = await Notices.findById(id);
+    if (!noticeInfo) {
+      next();
+      return;
+    }
     oldImageURL = noticeInfo.imageURL;
   }
 
