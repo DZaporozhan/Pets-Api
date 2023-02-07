@@ -373,6 +373,53 @@
       }
     },
     "/notices/favorite/{id}": {
+      "delete": {
+        "tags": ["Notices"],
+        "summary": "Remove notice favorite",
+        "description": "Remove notice favorite",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "User Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RemoveNoticeFromFavoriteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {}
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {}
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {}
+          },
+          "404": {
+            "description": "Not found",
+            "content": {}
+          },
+          "409": {
+            "description": "there is not notice with id: ${id} in your favorite list",
+            "content": {}
+          }
+        }
+      },
       "post": {
         "tags": ["Notices"],
         "summary": "Add notice to favorite",
