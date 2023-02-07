@@ -1527,6 +1527,33 @@
           }
         }
       },
+      "RemoveNoticeFromFavoriteResponse": {
+        "type": "object",
+        "properties": {
+          "favorite": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "ID notices",
+            "example": "[63b6ec81f474e0269d338e9e]"
+          },
+          "message": {
+            "type": "string",
+            "description": "ID notices",
+            "example": "Notice deleted from favorite"
+          }
+        },
+        "example": {
+          "favorite": [
+            "63b412bc9f6bb331b54624ae",
+            "63b412fca3523c134418e086",
+            "63b413796e2832af1fa84d37"
+          ],
+          "id": "63b4217e613598919c6a71ad",
+          "message": "notice deleted ${id} from favorite"
+        }
+      },
       "AddNoticeToFavoriteResponse": {
         "type": "object",
         "properties": {
