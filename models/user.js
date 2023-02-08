@@ -2,8 +2,7 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi").extend(require("@joi/date"));
 const { handleValidationError } = require("../helpers");
 
-const cityRegEx =
-  /^(([a-zA-Zа-яА-ЯёЁ]*(\s*)\([a-zA-Zа-яА-ЯёЁ\s]*\))|([a-zA-Zа-яА-ЯёЁ\-0-9]*)|([a-zA-Zа-яА-ЯёЁ]+[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*))$/;
+const cityRegEx = /^([A-Za-z]+)([,][ ][A-Za-z]+)*$/;
 
 const userSchema = Schema(
   {
