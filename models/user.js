@@ -4,6 +4,10 @@ const { handleValidationError } = require("../helpers");
 
 const cityRegEx = /^([A-Za-z]+)([,][ ][A-Za-z]+)*$/;
 
+const emailRegexp =
+  // eslint-disable-next-line no-useless-escape
+  /^(?=.{10,63}$)(([0-9A-Za-z][-0-9A-z\.]{1})@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/;
+
 const userSchema = Schema(
   {
     password: {
@@ -57,11 +61,14 @@ const joiRegistrationSchema = Joi.object({
       minDomainSegments: 2,
       tlds: { allow: ["com", "net"] },
     })
+    .pattern(emailRegexp)
+    .min(10)
+    .max(63)
     .required(),
   password: Joi.string().min(7).max(32).required(),
   repeat_password: Joi.ref("password"),
   name: Joi.string().required(),
-  city: Joi.string().required().pattern(cityRegEx),
+  city: Joi.string().pattern(cityRegEx).required(),
   phone: Joi.string()
     .length(13)
     .pattern(/^\+380\d{9}$/, "numbers")
