@@ -3,7 +3,6 @@ const Joi = require("joi").extend(require("@joi/date"));
 const { handleValidationError } = require("../helpers");
 
 const cityRegEx =
-  // eslint-disable-next-line no-useless-escape
   /^(([a-zA-Zа-яА-ЯёЁ]*(\s*)\([a-zA-Zа-яА-ЯёЁ\s]*\))|([a-zA-Zа-яА-ЯёЁ\-0-9]*)|([a-zA-Zа-яА-ЯёЁ]+[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*[\-|\s]?[a-zA-Zа-яА-ЯёЁ]*))$/;
 
 const userSchema = Schema(
