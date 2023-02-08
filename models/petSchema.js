@@ -18,11 +18,11 @@ const petSchema = Schema(
     },
     comments: {
       type: String,
-      default: '',
+      required: [true, 'Comments section is required'],
     },
     imageURL: {
       type: String,
-      default: '',
+      required: [true, 'Pet image is required'],
     },
     owner: {
       type: Schema.Types.ObjectId,
@@ -41,8 +41,8 @@ const joiAddingPetSchema = Joi.object({
   name: Joi.string().min(2).max(16).required(),
   birthdate: Joi.date().format('DD.MM.YYYY').required(),
   breed: Joi.string().min(2).max(16).required(),
-  comments: Joi.string().min(8).max(120).optional(),
-  imageURL: Joi.string().optional(),
+  comments: Joi.string().min(8).max(120).required(),
+  imageURL: Joi.string().required(),
 });
 
 module.exports = {

@@ -1162,7 +1162,7 @@
       },
       "AddPetRequest": {
         "type": "object",
-        "required": ["name", "birthdate", "breed"],
+        "required": ["name", "birthdate", "breed", "comments", "imageURL"],
         "properties": {
           "name": {
             "type": "string",
@@ -1177,7 +1177,7 @@
           "breed": {
             "type": "string",
             "description": "Pet breed",
-            "example": "Turkish Angora Cat"
+            "example": "Angora Cat"
           },
           "comments": {
             "type": "string",
@@ -1194,7 +1194,7 @@
         "example": {
           "name": "Jonny",
           "birthday": "20.05.2020",
-          "breed": "Turkish Angora Cat",
+          "breed": "Angora Cat",
           "comments": "My little kitten",
           "imageURL": "image.jpeg"
         }
@@ -1220,7 +1220,7 @@
           "breed": {
             "type": "string",
             "description": "Pet breed",
-            "example": "Turkish Angora Cat"
+            "example": "Angora Cat"
           },
           "imageURL": {
             "type": "string",
@@ -1252,7 +1252,7 @@
           "_id": "63b548d5471bb460e28dc813",
           "name": "Jonny",
           "birthday": "20.05.2020",
-          "breed": "Turkish Angora Cat",
+          "breed": "Angora Cat",
           "avatarURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg",
           "comments": "My little kitten",
           "owner": "63b420f8613598919c6a71a8",
@@ -1285,6 +1285,7 @@
         "properties": {
           "imageURL": {
             "type": "string",
+            "format": "binary",
             "description": "New pet image",
             "example": "image.jpeg"
           }
@@ -1351,7 +1352,7 @@
                     "breed": {
                       "type": "string",
                       "description": "Pet breed",
-                      "example": "Turkish Angora Cat"
+                      "example": "Angora Cat"
                     },
                     "imageURL": {
                       "type": "string",
@@ -1423,7 +1424,7 @@
                 "_id": "63b53c929165e3aafa203876",
                 "name": "Jonny",
                 "birthday": "20.05.2020",
-                "breed": "Turkish Angora Cat",
+                "breed": "Angora Cat",
                 "avatarURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1673004097/qplslyemyc1eo8qu7jb0.jpg",
                 "comments": "My little kitten",
                 "owner": "63b548d5471bb460e28dc813",
