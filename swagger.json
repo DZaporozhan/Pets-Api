@@ -890,6 +890,11 @@
                 "description": "User's email",
                 "format": "email",
                 "example": "example@gmail.com"
+              },
+              "id": {
+                "type": "string",
+                "description": "User's id",
+                "example": "63e54c6c20a5b4d8d452787a"
               }
             }
           }
@@ -897,7 +902,8 @@
         "example": {
           "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzYjJiN2VlYmNlZjEzOGRmZTkxOGU3MyIsImlhdCI6MTY3Mjg0OTUzNiwiZXhwIjoxNjcyODc4MzM2fQ.2O1A2OFCpuH00pMM1GgA-Dhy1kKCNEHDd80LrAyE8ac",
           "user": {
-            "email": "bob@gmail.com"
+            "email": "bob@gmail.com",
+            "id": "63e54c6c20a5b4d8d452787a"
           }
         }
       },
