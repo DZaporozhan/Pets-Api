@@ -88,9 +88,7 @@ const joiLoginSchema = Joi.object({
 const updateUserSchema = Joi.object({
   imageURL: Joi.string().optional(),
   name: Joi.string(),
-  email: Joi.string().email({
-    minDomainSegments: 2,
-  }),
+  email: Joi.string().pattern(emailRegexp),
   birthday: Joi.date().format("DD.MM.YYYY").utc(),
   phone: Joi.string()
     .length(13)
