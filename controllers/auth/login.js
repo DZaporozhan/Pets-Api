@@ -17,6 +17,8 @@ const login = async (req, res) => {
   const user = await User.findOne({ email });
 
   const id = user._id;
+  const favorite = user.favorite;
+  const name = user.name;
 
   const checkPassword = bcrypt.compareSync(password, user.password);
 
@@ -38,8 +40,10 @@ const login = async (req, res) => {
     code: 200,
     token,
     user: {
-      email,
       id,
+      email,
+      name,
+      favorite,
     },
   });
 };
