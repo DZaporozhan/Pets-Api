@@ -13,4 +13,6 @@ router.get("/current", authMiddleware, ctrlWrapper(controllerUser.getCurrent));
 
 router.post("/logout", authMiddleware, ctrlWrapper(controllerUser.logout));
 
+router.post("/refresh", ctrlWrapper(controllerUser.refresh));
+
 module.exports = router;

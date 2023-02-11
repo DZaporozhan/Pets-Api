@@ -1,9 +1,8 @@
 const { User, joiLoginSchema } = require("../../models/user");
 const createError = require("http-errors");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 
-const { SECRET_KEY } = process.env;
+const createTokens = require("../../helpers/createTokens");
 
 const login = async (req, res) => {
   const { error } = joiLoginSchema.validate(req.body);
@@ -31,14 +30,14 @@ const login = async (req, res) => {
   };
 
   // create a Token
-  const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "5h" });
 
-  await User.findByIdAndUpdate(user._id, { token });
+  const { accessToken, refreshToken } = createTokens(payload);
 
-  res.json({
-    status: "success",
-    code: 200,
-    token,
+  await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
+
+  res.status(200).json({
+    accessToken,
+    refreshToken,
     user: {
       id,
       email,
