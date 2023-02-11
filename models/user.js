@@ -91,7 +91,7 @@ const joiLoginSchema = Joi.object({
 
 const updateUserSchema = Joi.object({
   imageURL: Joi.string().optional(),
-  name: Joi.string(),
+  name: Joi.string().pattern(nameRegexp),
   email: Joi.string().pattern(emailRegexp),
   birthday: Joi.date().format("DD.MM.YYYY").utc(),
   phone: Joi.string()
