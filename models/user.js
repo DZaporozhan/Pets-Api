@@ -2,11 +2,11 @@ const { Schema, model } = require("mongoose");
 const Joi = require("joi").extend(require("@joi/date"));
 const { handleValidationError } = require("../helpers");
 
-const cityRegEx = /^([A-Za-z]+)([,][ ][A-Za-z]+)*$/;
-
 const emailRegexp =
   // eslint-disable-next-line no-useless-escape
   /^(?=.{10,63}$)(([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/;
+const nameRegexp = /^(?=.{2,16}$)([A-Za-z])*$/;
+const cityRegEx = /^[-a-z]+(?:(?:(,\s|,)[-a-z]+))$/i;
 
 const userSchema = Schema(
   {
@@ -67,7 +67,7 @@ const joiRegistrationSchema = Joi.object({
     .required(),
   password: Joi.string().min(7).max(32).required(),
   repeat_password: Joi.ref("password"),
-  name: Joi.string().required(),
+  name: Joi.string().pattern(nameRegexp).required(),
   city: Joi.string().pattern(cityRegEx).required(),
   phone: Joi.string()
     .length(13)
