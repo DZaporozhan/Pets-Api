@@ -1352,7 +1352,7 @@
                 "description": "user ID",
                 "example": "63b548d5471bb460e28dc813"
               },
-              "avatarURL": {
+              "imageURL": {
                 "type": "string",
                 "description": "User avatar",
                 "example": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
@@ -1436,6 +1436,11 @@
                     "type": "string",
                     "description": "User birthday",
                     "example": "00.00.0000"
+                  },
+                  "favorite": {
+                    "type": "array",
+                    "description": "Array of id of favorite notices",
+                    "example": "[]"
                   }
                 }
               }
@@ -1445,7 +1450,7 @@
         "example": {
           "user": {
             "_id": "63b548d5471bb460e28dc813",
-            "avatarURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1673004097/qplslyemyc1eo8qu7jb0.jpg",
+            "imageURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1673004097/qplslyemyc1eo8qu7jb0.jpg",
             "userPets": [
               {
                 "_id": "63b53c929165e3aafa203876",
@@ -1464,7 +1469,8 @@
               "email": "test@gmail.com",
               "city": "Kyiv, Ukraine",
               "phone": "+380931234567",
-              "birthday": "00.00.0000"
+              "birthday": "00.00.0000",
+              "favorite": []
             }
           }
         }
