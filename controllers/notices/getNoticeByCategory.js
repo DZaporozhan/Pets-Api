@@ -9,7 +9,7 @@ const getNoticeByCategory = async (req, res) => {
     limit,
   });
 
-  const categoryList = ['sell', 'lost/found', 'in good hands'];
+  const categoryList = ['sell', 'lost found', 'in good hands'];
   const key = categoryList.includes(category);
   if (!key) {
     throw new createError.BadRequest('BadRequest: This category doesn`t exist');
