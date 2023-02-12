@@ -21,23 +21,20 @@ const authMiddleware = async (req, _, next) => {
       throw new createError.Unauthorized("Not authorized");
     }
 
-    try {
-      const { id } = jwt.verify(token, SECRET_KEY);
+    const { id } = jwt.verify(token, SECRET_KEY);
 
-      const user = await User.findById(id);
-      if (!user || !user.accessToken || token !== String(user.accessToken)) {
-        throw new createError.Unauthorized("Not authorized");
-      }
-
-      req.user = user;
-
-      next();
-    } catch (error) {
-      if (error.message === "Invalid Signature") {
-        error.status = 401;
-      }
+    const user = await User.findById(id);
+    if (!user || !user.accessToken) {
+      throw new createError.Unauthorized("Not authorized");
     }
+
+    req.user = user;
+    req.token = token;
+    next();
   } catch (error) {
+    if (error.message === "Invalid Signature") {
+      error.status = 401;
+    }
     next(error);
   }
 };
