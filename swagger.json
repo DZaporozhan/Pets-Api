@@ -211,7 +211,7 @@
           {
             "name": "category",
             "in": "query",
-            "description": "Category by notices: [sell, in good hands, lost/found]",
+            "description": "Category by notices: [sell, in good hands, lost found]",
             "required": false,
             "type": "string"
           },
@@ -1005,7 +1005,7 @@
           "category": {
             "type": "string",
             "description": "Category by notice",
-            "example": "Lost/found"
+            "example": "lost found"
           },
           "title": {
             "type": "string",
@@ -1070,7 +1070,7 @@
         },
         "example": {
           "_id": "63b4217e613598919c6a71ad",
-          "category": "lost/found",
+          "category": "lost found",
           "title": "lost persian cat",
           "name": "Persik",
           "birthday": "02.02.2020",
@@ -1100,7 +1100,7 @@
                 "category": {
                   "type": "string",
                   "description": "Category by notice",
-                  "example": "Lost/found"
+                  "example": "lost found"
                 },
                 "title": {
                   "type": "string",
@@ -1170,7 +1170,7 @@
           "notices": [
             {
               "_id": "63b5ce5d8adff5be0dbe3457",
-              "category": "lost/found",
+              "category": "lost found",
               "title": "lost persian cat",
               "name": "Persik",
               "birthday": "02.02.2020",
@@ -1853,7 +1853,7 @@
         "properties": {
           "category": {
             "type": "string",
-            "description": "Category by notice on of ['sell', 'in good hands', 'lost/found']",
+            "description": "Category by notice on of ['sell', 'in good hands', 'lost found']",
             "example": "sell"
           },
           "title": {
