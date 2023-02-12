@@ -1,20 +1,21 @@
 const { Pet } = require('../../models/petSchema');
 
 const getUserInfo = async (req, res) => {
-  const { avatarURL, name, email, birthday, phone, city, _id } = req.user;
+  const { imageURL, name, email, birthday, phone, city, _id, favorite } = req.user;
 
   const pets = await Pet.find({ owner: _id });
 
   const userInfo = {
     user: {
       _id,
-      avatarURL,
+      imageURL,
       userInfo: {
         name,
         email,
         birthday,
         phone,
         city,
+        favorite,
       },
       userPets: pets,
     },
