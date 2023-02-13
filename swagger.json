@@ -228,6 +228,13 @@
             "description": "the number of query objects to display on one page for pagination",
             "required": false,
             "type": "integer"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "search notices by title in category",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -243,6 +250,10 @@
           },
           "400": {
             "description": "Bad Request: This category doesn`t exist",
+            "content": {}
+          },
+          "404": {
+            "description": "Bad Request: Notices with title = dasdwqwe not found!",
             "content": {}
           }
         }
