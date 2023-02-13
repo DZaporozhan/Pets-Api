@@ -1,31 +1,34 @@
-const { Notices } = require('../../models/noticesSchema');
-const createError = require('http-errors');
+const { Notices } = require("../../models/noticesSchema");
+const createError = require("http-errors");
 
 const getNoticeByCategory = async (req, res) => {
   const { category, page = 1, limit = 10, title } = req.query;
   const skip = (page - 1) * limit;
 
-  let result = await Notices.find({ category }, '-createdAt -updatedAt', {
+  let result = await Notices.find({ category }, "-createdAt -updatedAt", {
     skip,
     limit,
   });
 
+  let total = await Notices.countDocuments({ category });
+
   if (title) {
-    const facts = await Notices.find({ category }, '-createdAt -updatedAt');
+    const facts = await Notices.find({ category }, "-createdAt -updatedAt");
     const factsFilter = facts.filter((fact) =>
       fact.title.toLowerCase().includes(title.toLowerCase())
     );
     result = factsFilter;
+    total = factsFilter.length;
   }
 
-  const categoryList = ['sell', 'lost found', 'in good hands'];
+  const categoryList = ["sell", "lost found", "in good hands"];
   const key = categoryList.includes(category);
   if (!key) {
-    throw new createError.BadRequest('BadRequest: This category doesn`t exist');
+    throw new createError.BadRequest("BadRequest: This category doesn`t exist");
   }
 
   if (!result) {
-    throw new createError.NotFound('not found');
+    throw new createError.NotFound("not found");
   }
 
   if (!result.length) {
@@ -35,10 +38,11 @@ const getNoticeByCategory = async (req, res) => {
   }
 
   res.json({
-    status: 'Success',
+    status: "Success",
     code: 200,
     data: {
       result,
+      total,
     },
   });
 };
