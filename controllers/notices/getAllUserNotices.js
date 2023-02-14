@@ -5,12 +5,14 @@ const getAllUserNotices = async ({ user, query }, res) => {
 
   const skip = (page - 1) * limit;
 
-  const userNotices = await Notices.find({ owner: user.id }, "", {
+  const total = await Notices.countDocuments({ owner: user.id });
+
+  const data = await Notices.find({ owner: user.id }, "", {
     skip,
     limit: Number(limit),
   });
 
-  res.json(userNotices);
+  res.json({ data, total });
 };
 
 module.exports = getAllUserNotices;
