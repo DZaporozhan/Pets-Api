@@ -31,11 +31,11 @@ const getNoticeByCategory = async (req, res) => {
     throw new createError.NotFound("not found");
   }
 
-  if (!result.length) {
-    throw new createError.NotFound(
-      `Bad Request: Notices with title = ${title} not found!`
-    );
-  }
+  // if (!result.length) {
+  //   throw new createError.NotFound(
+  //     `Bad Request: Notices with title = ${title} not found!`
+  //   );
+  // }
 
   res.json({
     status: "Success",
