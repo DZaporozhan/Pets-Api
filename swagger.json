@@ -310,6 +310,13 @@
             "description": "the number of query objects to display on one page for pagination",
             "required": false,
             "type": "integer"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "search notices by title in category",
+            "required": false,
+            "type": "string"
           }
         ],
         "security": [{ "Bearer": [] }],
@@ -495,6 +502,13 @@
             "required": false,
             "description": "number of notices per page",
             "type": "integer"
+          },
+          {
+            "name": "title",
+            "in": "query",
+            "description": "search notices by title in category",
+            "required": false,
+            "type": "string"
           }
         ],
         "security": [{ "Bearer": [] }],
