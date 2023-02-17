@@ -7,8 +7,8 @@ const getNoticeByCategory = async (req, res) => {
 
   let result = await Notices.find({ category }, "-createdAt -updatedAt", {
     skip,
-    limit,
-  });
+    limit: Number(limit),
+  }).sort({ createdAt: -1 });
 
   let total = await Notices.countDocuments({ category });
 
