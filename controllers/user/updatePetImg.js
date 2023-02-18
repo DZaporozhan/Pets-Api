@@ -14,6 +14,7 @@ const updatePetImg = async (req, res) => {
   res.json({
     message: `Your pet ${pet.name} image successfully updated`,
     imageURL,
+    id,
   });
 };
 
