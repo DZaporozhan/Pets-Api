@@ -2,23 +2,33 @@ const { Notices } = require("../../models/noticesSchema");
 const createError = require("http-errors");
 
 const getNoticeByCategory = async (req, res) => {
-  const { category, page = 1, limit = 10, title } = req.query;
+  const { category, page = 1, limit = 10, title = "" } = req.query;
   const skip = (page - 1) * limit;
 
-  let result = await Notices.find({ category }, "-createdAt -updatedAt", {
-    skip,
-    limit,
-  });
+  let result;
+  let total;
 
-  let total = await Notices.countDocuments({ category });
+  if (title !== "") {
+    result = await Notices.find(
+      { $text: { $search: title }, category },
+      "-createdAt -updatedAt",
+      {
+        skip,
+        limit: Number(limit),
+      }
+    ).sort({ createdAt: -1 });
 
-  if (title) {
-    const facts = await Notices.find({ category }, "-createdAt -updatedAt");
-    const factsFilter = facts.filter((fact) =>
-      fact.title.toLowerCase().includes(title.toLowerCase())
-    );
-    result = factsFilter;
-    total = factsFilter.length;
+    total = await Notices.countDocuments({
+      $text: { $search: title },
+      category,
+    });
+  } else {
+    result = await Notices.find({ category }, "-createdAt -updatedAt", {
+      skip,
+      limit: Number(limit),
+    }).sort({ createdAt: -1 });
+
+    total = await Notices.countDocuments({ category });
   }
 
   const categoryList = ["sell", "lost found", "in good hands"];
