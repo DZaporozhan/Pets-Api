@@ -1359,11 +1359,17 @@
             "type": "string",
             "description": "Image URL from Cloudinary",
             "example": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
+          },
+          "id": {
+            "type": "string",
+            "description": "Pet id",
+            "example": "63eeb137c66d0bdb71a2215b"
           }
         },
         "example": {
           "message": "Your pet Jonny image successfully updated",
-          "imageURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg"
+          "imageURL": "https://res.cloudinary.com/dsrjlhmr8/image/upload/v1672825045/acvvewo9t58ojoytnaks.jpg",
+          "id": "63eeb137c66d0bdb71a2215b"
         }
       },
       "GetUserInfoResponse": {
