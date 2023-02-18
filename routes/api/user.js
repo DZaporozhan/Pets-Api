@@ -29,6 +29,7 @@ router.patch(
   '/pets/:id',
   authMiddleware,
   upload.single('imageURL'),
+  cloudinaryDeleteImage,
   cloudinaryAddImage,
   ctrlWrapper(controllerPet.updatePetImg)
 );
