@@ -100,6 +100,8 @@ const noticesReqSchema = Joi.object({
   comments: Joi.string().min(8).max(120).optional(),
 });
 
+noticesSchema.index({ title: "text" });
+
 const Notices = model("notices", noticesSchema);
 
 module.exports = {

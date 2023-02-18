@@ -1,24 +1,35 @@
 const { Notices } = require("../../models/noticesSchema");
 
 const getAllUserNotices = async ({ user, query }, res) => {
-  const { page = 1, limit = 50, title } = query;
+  const { page = 1, limit = 50, title = "" } = query;
 
   const skip = (page - 1) * limit;
 
-  let total = await Notices.countDocuments({ owner: user.id });
+  let data;
 
-  let data = await Notices.find({ owner: user.id }, "-createdAt -updatedAt", {
-    skip,
-    limit: Number(limit),
-  }).sort({ createdAt: -1 });
+  let total;
 
-  if (title) {
-    const facts = await Notices.find({ owner: user.id });
-    const factsFilter = facts.filter((fact) =>
-      fact.title.toLowerCase().includes(title.toLowerCase())
-    );
-    data = factsFilter;
-    total = factsFilter.length;
+  if (title !== "") {
+    data = await Notices.find(
+      { $text: { $search: title }, owner: user.id },
+      "-createdAt -updatedAt",
+      {
+        skip,
+        limit: Number(limit),
+      }
+    ).sort({ createdAt: -1 });
+
+    total = await Notices.countDocuments({
+      $text: { $search: title },
+      owner: user.id,
+    });
+  } else {
+    data = await Notices.find({ owner: user.id }, "-createdAt -updatedAt", {
+      skip,
+      limit: Number(limit),
+    }).sort({ createdAt: -1 });
+
+    total = await Notices.countDocuments({ owner: user.id });
   }
 
   res.json({ data, total });

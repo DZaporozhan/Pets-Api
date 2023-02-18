@@ -1,8 +1,8 @@
-const { Notices } = require('../../models/noticesSchema');
-const createError = require('http-errors');
+const { Notices } = require("../../models/noticesSchema");
+const createError = require("http-errors");
 
 const getFavoriteNotices = async ({ _id, query, user }, res) => {
-  const { page = 1, limit = 50, title } = query;
+  const { page = 1, limit = 50, title = "" } = query;
 
   const skip = (page - 1) * limit;
 
@@ -10,24 +10,35 @@ const getFavoriteNotices = async ({ _id, query, user }, res) => {
     return favorite.toString();
   });
 
-  let total = await Notices.countDocuments({ _id: idArray });
+  let total;
 
-  let data = await Notices.find({ _id: idArray }, '', {
-    skip,
-    limit: Number(limit),
-  });
+  let data;
 
-  if (title) {
-    const facts = await Notices.find({ _id: idArray });
-    const factsFilter = facts.filter((fact) =>
-      fact.title.toLowerCase().includes(title.toLowerCase())
+  if (title !== "") {
+    data = await Notices.find(
+      { $text: { $search: title }, _id: idArray },
+      "-createdAt -updatedAt",
+      {
+        skip,
+        limit: Number(limit),
+      }
     );
-    data = factsFilter;
-    total = factsFilter.length;
+
+    total = await Notices.countDocuments({
+      $text: { $search: title },
+      _id: idArray,
+    });
+  } else {
+    data = await Notices.find({ _id: idArray }, "-createdAt -updatedAt", {
+      skip,
+      limit: Number(limit),
+    });
+
+    total = await Notices.countDocuments({ _id: idArray });
   }
 
   if (!data) {
-    throw new createError.NotFound(404, 'You have no any favorite notices');
+    throw new createError.NotFound(404, "You have no any favorite notices");
   }
 
   res.status(200).json({ data, total });
