@@ -16,7 +16,7 @@ const getFavoriteNotices = async ({ _id, query, user }, res) => {
 
   if (title !== "") {
     data = await Notices.find(
-      { $text: { $search: title }, _id: idArray },
+      { title: { $regex: title, $options: "i" }, _id: idArray },
       "-createdAt -updatedAt",
       {
         skip,
@@ -25,7 +25,7 @@ const getFavoriteNotices = async ({ _id, query, user }, res) => {
     );
 
     total = await Notices.countDocuments({
-      $text: { $search: title },
+      title: { $regex: title, $options: "i" },
       _id: idArray,
     });
   } else {

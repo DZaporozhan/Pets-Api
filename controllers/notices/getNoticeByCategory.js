@@ -10,7 +10,7 @@ const getNoticeByCategory = async (req, res) => {
 
   if (title !== "") {
     result = await Notices.find(
-      { $text: { $search: title }, category },
+      { title: { $regex: title, $options: "i" }, category },
       "-createdAt -updatedAt",
       {
         skip,
@@ -19,7 +19,7 @@ const getNoticeByCategory = async (req, res) => {
     ).sort({ createdAt: -1 });
 
     total = await Notices.countDocuments({
-      $text: { $search: title },
+      title: { $regex: title, $options: "i" },
       category,
     });
   } else {

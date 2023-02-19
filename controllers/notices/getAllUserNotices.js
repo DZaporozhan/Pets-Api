@@ -11,7 +11,7 @@ const getAllUserNotices = async ({ user, query }, res) => {
 
   if (title !== "") {
     data = await Notices.find(
-      { $text: { $search: title }, owner: user.id },
+      { title: { $regex: title, $options: "i" }, owner: user.id },
       "-createdAt -updatedAt",
       {
         skip,
@@ -20,7 +20,7 @@ const getAllUserNotices = async ({ user, query }, res) => {
     ).sort({ createdAt: -1 });
 
     total = await Notices.countDocuments({
-      $text: { $search: title },
+      title: { $regex: title, $options: "i" },
       owner: user.id,
     });
   } else {
