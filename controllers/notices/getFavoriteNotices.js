@@ -24,6 +24,17 @@ const getFavoriteNotices = async ({ _id, query, user }, res) => {
       }
     );
 
+    data = idArray
+      .reduce((acc, el) => {
+        const noticeItem = data.find(({ _id }) => _id.toString() === el);
+
+        if (noticeItem) {
+          acc.push(noticeItem);
+        }
+        return acc;
+      }, [])
+      .reverse();
+
     total = await Notices.countDocuments({
       title: { $regex: title, $options: "i" },
       _id: idArray,
@@ -33,6 +44,17 @@ const getFavoriteNotices = async ({ _id, query, user }, res) => {
       skip,
       limit: Number(limit),
     });
+
+    data = idArray
+      .reduce((acc, el) => {
+        const noticeItem = data.find(({ _id }) => _id.toString() === el);
+
+        if (noticeItem) {
+          acc.push(noticeItem);
+        }
+        return acc;
+      }, [])
+      .reverse();
 
     total = await Notices.countDocuments({ _id: idArray });
   }
