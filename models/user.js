@@ -62,7 +62,7 @@ const joiRegistrationSchema = Joi.object({
   email: Joi.string()
     .email({
       minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
+      tlds: { allow: ["com", "net", "ua", "org"] },
     })
     .pattern(emailRegexp)
     .min(10)
@@ -82,7 +82,7 @@ const joiLoginSchema = Joi.object({
   email: Joi.string()
     .email({
       minDomainSegments: 2,
-      tlds: { allow: ["com", "net"] },
+      tlds: { allow: ["com", "net", "ua", "org"] },
     })
     .required(),
   password: Joi.string().min(7).max(32).required(),
