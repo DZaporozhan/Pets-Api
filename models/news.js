@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 
-
-const newsSchema =  Schema(
+const newsSchema = Schema(
   {
     title: {
       type: String,
@@ -22,8 +21,6 @@ const newsSchema =  Schema(
   },
   { versionKey: false, timestamps: true }
 );
-
-
 
 const News = model("news", newsSchema);
 
