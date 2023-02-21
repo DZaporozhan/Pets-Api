@@ -6,9 +6,10 @@ const categoryList = ["sell", "lost found", "in good hands"];
 const sexList = ["male", "female"];
 const dateRegExp =
   /^\s*(3[01]|[12][0-9]|0?[1-9])\.(1[012]|0?[1-9])\.((?:19|20)\d{2})\s*$/;
-const textRegExp =
-  /^([a-zA-Z\u0080-\u024F]+(?:. |-| |'))*[a-zA-Z\u0080-\u024F]*$/;
+
 const priceRegExp = /^-?\d*\d+.?(\d{1,2})?$/;
+// eslint-disable-next-line no-useless-escape
+const cityRegEx = /^[- a-z\']+(?:(?:(,\s|,)[-a-z]+))$/i;
 
 const noticesSchema = new Schema(
   {
@@ -94,7 +95,7 @@ const noticesReqSchema = Joi.object({
   sex: Joi.string()
     .valid(...Object.values(sexList))
     .required(),
-  location: Joi.string().pattern(textRegExp).required(),
+  location: Joi.string().pattern(cityRegEx).required(),
   price: Joi.string().pattern(priceRegExp).optional(),
   imageURL: Joi.string().optional(),
   comments: Joi.string().min(8).max(120).optional(),
