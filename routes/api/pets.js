@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { controllerUserData } = require('../../controllers');
+const { controllerPet } = require('../../controllers');
 const {
   authMiddleware,
   upload,
@@ -10,15 +10,23 @@ const {
 } = require('../../middlewares');
 const { ctrlWrapper } = require('../../helpers');
 
-router.get('/', authMiddleware, ctrlWrapper(controllerUserData.getUserInfo));
+router.post(
+  '/',
+  authMiddleware,
+  upload.single('imageURL'),
+  cloudinaryAddImage,
+  ctrlWrapper(controllerPet.addPet)
+);
+
+router.delete('/:id', authMiddleware, cloudinaryDeleteImage, ctrlWrapper(controllerPet.removePet));
 
 router.patch(
-  '/',
+  '/:id',
   authMiddleware,
   upload.single('imageURL'),
   cloudinaryDeleteImage,
   cloudinaryAddImage,
-  ctrlWrapper(controllerUserData.updateUser)
+  ctrlWrapper(controllerPet.updatePetImg)
 );
 
 module.exports = router;

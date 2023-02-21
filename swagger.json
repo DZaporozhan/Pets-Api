@@ -31,6 +31,10 @@
     {
       "name": "User",
       "description": "Operations with users"
+    },
+    {
+      "name": "Pets",
+      "description": "Operations with user`s pets"
     }
   ],
   "paths": {
@@ -537,9 +541,9 @@
         }
       }
     },
-    "/user/pets": {
+    "/pets": {
       "post": {
-        "tags": ["User"],
+        "tags": ["Pets"],
         "summary": "Add User pets",
         "description": "Add User pets",
         "parameters": [],
@@ -581,9 +585,9 @@
         }
       }
     },
-    "/user/pets/{id}": {
+    "/pets/{id}": {
       "delete": {
-        "tags": ["User"],
+        "tags": ["Pets"],
         "summary": "Delete User pet",
         "description": "Delete User pet",
         "parameters": [
@@ -622,7 +626,7 @@
         }
       },
       "patch": {
-        "tags": ["User"],
+        "tags": ["Pets"],
         "summary": "Update user Pet Image",
         "description": "Update user Pet Image",
         "parameters": [
