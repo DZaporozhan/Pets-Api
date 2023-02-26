@@ -15,4 +15,8 @@ router.post("/logout", authMiddleware, ctrlWrapper(controllerUser.logout));
 
 router.post("/refresh", ctrlWrapper(controllerUser.refresh));
 
+router.get("/google", ctrlWrapper(controllerUser.googleAuth));
+
+router.get("/google-redirect", ctrlWrapper(controllerUser.googleRedirect));
+
 module.exports = router;
