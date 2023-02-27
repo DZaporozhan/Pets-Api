@@ -48,11 +48,10 @@ const googleRedirect = async (req, res) => {
 
   const { email, name } = userData.data;
   const user = await User.findOne({ email });
-
+  let token = null;
   if (user) {
-    const id = user._id;
     const payload = {
-      id,
+      id: user._id,
     };
 
     const { accessToken, refreshToken } = createTokens(payload);
@@ -81,13 +80,10 @@ const googleRedirect = async (req, res) => {
       accessToken,
       refreshToken,
     });
-
-    return res.redirect(
-      `${process.env.FRONTEND_URL}login/?accessToken=${accessToken}`
-    );
+    token = accessToken;
   }
 
-  return res.redirect(`${process.env.FRONTEND_URL}`);
+  return res.redirect(`${process.env.FRONTEND_URL}login/?accessToken=${token}`);
 };
 
 module.exports = { googleAuth, googleRedirect };
