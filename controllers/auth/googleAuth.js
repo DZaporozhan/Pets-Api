@@ -2,6 +2,7 @@ const queryString = require("query-string");
 const axios = require("axios");
 const { User } = require("../../models/user");
 const createTokens = require("../../helpers/createTokens");
+const bcrypt = require("bcryptjs");
 require("dotenv").config();
 
 const googleAuth = async (req, res) => {
@@ -44,7 +45,8 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   });
-  const { email } = userData.data;
+  console.log(userData);
+  const { email, name } = userData.data;
   const user = await User.findOne({ email });
   const id = user._id;
 
@@ -60,8 +62,30 @@ const googleRedirect = async (req, res) => {
       `${process.env.FRONTEND_URL}login/?accessToken=${accessToken}`
     );
   }
+  if (!user) {
+    const payload = {
+      id: userData.data.id,
+    };
 
-  return res.redirect(`${process.env.FRONTEND_URL}${email}`);
+    const { accessToken, refreshToken } = createTokens(payload);
+    const hashPassword = bcrypt.hashSync(
+      userData.data.id,
+      bcrypt.genSaltSync(10)
+    );
+    await User.create({
+      email,
+      password: hashPassword,
+      name,
+      accessToken,
+      refreshToken,
+    });
+
+    return res.redirect(
+      `${process.env.FRONTEND_URL}login/?accessToken=${accessToken}`
+    );
+  }
+
+  return res.redirect(`${process.env.FRONTEND_URL}`);
 };
 
 module.exports = { googleAuth, googleRedirect };
