@@ -29,8 +29,6 @@ const login = async (req, res) => {
     id: user._id,
   };
 
-  // create a Token
-
   const { accessToken, refreshToken } = createTokens(payload);
 
   await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });

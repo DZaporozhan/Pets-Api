@@ -1,5 +1,7 @@
 const queryString = require("query-string");
 const axios = require("axios");
+const { User } = require("../../models/user");
+const createTokens = require("../../helpers/createTokens");
 require("dotenv").config();
 
 const googleAuth = async (req, res) => {
@@ -42,13 +44,24 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   });
-  // userData.data.email
-  // ...
-  // ...
-  // ...
-  return res.redirect(
-    `${process.env.FRONTEND_URL}?email=${userData.data.email}`
-  );
+  const { email } = userData.data;
+  const user = await User.findOne({ email });
+  const id = user._id;
+
+  if (user) {
+    const payload = {
+      id,
+    };
+
+    const { accessToken, refreshToken } = createTokens(payload);
+
+    await User.findByIdAndUpdate(user._id, { accessToken, refreshToken });
+    return res.redirect(
+      `${process.env.FRONTEND_URL}login/?accessToken=${accessToken}`
+    );
+  }
+
+  return res.redirect(`${process.env.FRONTEND_URL}${email}`);
 };
 
 module.exports = { googleAuth, googleRedirect };
