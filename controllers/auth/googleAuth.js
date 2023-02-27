@@ -47,10 +47,10 @@ const googleRedirect = async (req, res) => {
   });
 
   const { email, name } = userData.data;
-  const user = (await User.findOne({ email })) || null;
-  const id = user._id;
+  const user = await User.findOne({ email });
 
   if (user) {
+    const id = user._id;
     const payload = {
       id,
     };
