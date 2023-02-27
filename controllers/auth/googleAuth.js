@@ -80,7 +80,9 @@ const googleRedirect = async (req, res) => {
       accessToken,
       refreshToken,
     });
-    token = accessToken;
+
+    const user = await User.findOne({ email });
+    token = user.accessToken;
   }
 
   return res.redirect(`${process.env.FRONTEND_URL}login/?accessToken=${token}`);
