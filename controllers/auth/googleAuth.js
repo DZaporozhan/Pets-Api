@@ -45,9 +45,9 @@ const googleRedirect = async (req, res) => {
       Authorization: `Bearer ${tokenData.data.access_token}`,
     },
   });
-  console.log(userData);
+
   const { email, name } = userData.data;
-  const user = await User.findOne({ email });
+  const user = (await User.findOne({ email })) || null;
   const id = user._id;
 
   if (user) {
@@ -76,6 +76,8 @@ const googleRedirect = async (req, res) => {
       email,
       password: hashPassword,
       name,
+      city: "City, Region",
+      phone: "+380*********",
       accessToken,
       refreshToken,
     });
