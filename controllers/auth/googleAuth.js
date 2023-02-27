@@ -69,7 +69,7 @@ const googleRedirect = async (req, res) => {
 
     const { accessToken, refreshToken } = createTokens(payload);
     const hashPassword = bcrypt.hashSync(
-      userData.data.id,
+      Number(userData.data.id),
       bcrypt.genSaltSync(10)
     );
     await User.create({
